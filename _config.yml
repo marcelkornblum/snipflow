@@ -3,4 +3,7 @@ plugins:
 - jekyll-remote-theme
 title: SnipFlow ✂〰
 description: A workflow for productive engineers
+titles_from_headings:
+  enabled:     true
+  strip_title: true
 show_downloads: false
