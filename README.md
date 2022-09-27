@@ -11,7 +11,7 @@ Tested by many teams over several years, the methodology results in improved dev
 ## Read more
 
 - [Why use SnipFlow](#why-use-snipflow)
-- [How SnipFlow works](./how-it-works)
+- [How SnipFlow works](./how-it-works.md)
   - [Prerequisites]
   - [Overview]
   - [Version control]
@@ -19,15 +19,15 @@ Tested by many teams over several years, the methodology results in improved dev
   - [Environments]
   - [CI/CD]
   - [ChatOps]
-- [Getting started](./getting-started)
+- [Getting started](./getting-started.md)
   - [Setting up]
   - [Onboarding]
-- [Benefits](./benefits)
+- [Benefits](./benefits.md)
   - [Easy onboarding]
   - [Clean versioning]
   - [Transparency]
   - [Communication]
-- [Principles](./principles)
+- [Principles](./principles.md)
 
 ## Why use SnipFlow?
 [Why use SnipFlow?]: #why-use-snipflow
