@@ -2,6 +2,5 @@ theme: jekyll-theme-cayman
 title: ✂〰 SnipFlow
 description: A workflow for productive engineers
 titles_from_headings:
-  enabled: true
-  strip_title: true
+  enabled: false
 show_downloads: false
