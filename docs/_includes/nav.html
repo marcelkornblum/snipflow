@@ -5,3 +5,31 @@
     {% endif %}
 {% endfor %}
 </ul>
+
+
+
+<div>
+    {% if site.data.sitenav.toc[0] %}
+    <ul>
+        {% for item in site.data.sitenav.toc %}
+        <li><a href="{{ item.url }}">{{ item.title }}</a>
+            {% if item.subfolderitems[0] %}
+            <ul>
+                {% for entry in item.subfolderitems %}
+                <li><a href="{{ entry.url }}">{{ entry.title }}</a>
+                    {% if entry.subsubfolderitems[0] %}
+                    <ul>
+                        {% for subentry in entry.subsubfolderitems %}
+                        <li><a href="{{ subentry.url }}">{{ subentry.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>

@@ -1,0 +1,25 @@
+toc:
+  - title: Introduction
+    url: /
+  - title: Why use SnipFlow
+    url: /#why-use-snipflow
+  - title: How SnipFlow works
+    url: /how-it-works.html
+    subfolderitems:
+      - title: Piece 1
+        url: /piece1.html
+  - title: Getting started
+    url: /getting-started.html
+    subfolderitems:
+      - title: Widget 1
+        url: /widget1.html
+  - title: Benefits
+    url: /benefits.html
+    subfolderitems:
+      - title: Widget 1
+        url: /widget1.html
+  - title: Principles
+    url: /principles.html
+    subfolderitems:
+      - title: Widget 1
+        url: /widget1.html

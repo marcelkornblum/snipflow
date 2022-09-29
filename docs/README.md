@@ -1,12 +1,12 @@
-# ✂〰 SnipFlow Methodology
+# The SnipFlow Methodology
 
-> A workflow for productive engineers
+SnipFlow connects version control, issue tracking, CI and non-production environments into a cohesive way of working.
 
-SnipFlow is a workflow for developers which connects version control, issue tracking, CI and non-production environments into a cohesive way of working. It reduces admin and context switching, improves communication and transparency between team members, and scales from side hustles to business critical product teams.
+It reduces admin and developer context switching, improves communication and transparency between all team members, and scales from side hustles to business critical product teams.
 
 Whatever your current toolset, SnipFlow uses automation and a shared terminology to connect the dots between technical tools - like version control and CI tooling - with project management and communication tools - like issue trackers, team chat and preview environments.
 
-Tested by many teams over several years, the methodology results in improved developer focus and fewer administrative tasks, along with better transparency for leads and managers, and easier rationalising during complex debugging.
+Tested by many teams over several years, the SnipFlow workflow results in improved developer focus and fewer administrative tasks, along with better transparency for leads and managers, and easier rationalising during complex debugging.
 
 ## Read more
 
