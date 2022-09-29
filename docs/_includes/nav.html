@@ -1,6 +1,6 @@
 <ul>
 {% for doc in site.docs %}
-    {% if doc.category == "" %}
+    {% if doc.category == null %}
     <li><a href="{{ doc.url }}">{{ doc.title }}</a></li>
     {% endif %}
 {% endfor %}

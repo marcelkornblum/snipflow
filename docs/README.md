@@ -32,7 +32,9 @@ Tested by many teams over several years, the methodology results in improved dev
 ## Why use SnipFlow?
 [Why use SnipFlow?]: #why-use-snipflow
 
-SnipFlow costs nothing, is easy to understand and onboard teams to, and doesn't replace any of your existing tooling. It gives your team a way to connect everything together and a simple model and terminology to understand how it's all connected, so that communication becomes easier and everyday tasks become simpler and safer.
+SnipFlow costs nothing, is easy to understand and onboard teams to, and doesn't replace any of your existing tooling.
+
+It gives your team a simple way to connect everything together, easy ways to deploy and places to review your work in various stages, as well as standard terminology, so that communication becomes easier and everyday tasks become simpler and less risky.
 
 There are many tools to help manage aspects of coders' work, but many of them end up needing technical administration, often without warning, which breaks a developer's flow state. SnipFlow abstracts these tasks to automation systems and ChatOps, removing the onus on the individual developer.
 
