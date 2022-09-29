@@ -2,15 +2,34 @@
 <html lang="{{ site.lang | default: "en-US" }}">
   <head>
     <meta charset="UTF-8">
+    <link rel="canonical" href="http://www.snipflow.works/" />
+    <title>SnipFlow | A workflow for productive engineers</title>
+    <meta property="og:title" content="✂〰 SnipFlow" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="description" content="A workflow for productive engineers" />
+    <meta property="og:description" content="A workflow for productive engineers" />
+    <meta property="og:url" content="http://www.snipflow.works/" />
+    <meta property="og:site_name" content="✂〰 SnipFlow" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <meta property="twitter:title" content="✂〰 SnipFlow" />
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"WebSite","description":"A workflow for productive engineers","headline":"✂〰 SnipFlow","name":"✂〰 SnipFlow","url":"http://www.snipflow.works/"}
+    </script>
 
-{% seo %}
+    <link rel="shortcut icon" type="image/x-icon" href="{{ '/favicon.ico' | relative_url }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/images/apple-touch-icon.png' | relative_url }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/images/favicon-32x32.png' | relative_url }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/images/favicon-16x16.png' | relative_url }}">
+
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style" type="text/css" crossorigin>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
-    {% include head-custom.html %}
+
+    {% include head-custom-google-analytics.html %}
   </head>
   <body>
     <a id="skip-to-content" href="#content">Skip to the content.</a>
