@@ -1,3 +1,7 @@
+---
+title: Principles
+---
+
 # Principles
 
 > The main guiding principles behind SnipFlow

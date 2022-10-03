@@ -1,35 +1,22 @@
-<ul>
-{% for doc in site.docs %}
-    {% if doc.category == null %}
-    <li><a href="{{ doc.url }}">{{ doc.title }}</a></li>
-    {% endif %}
-{% endfor %}
-</ul>
+<button aria-expanded="false">
+  Menu
+</button>
 
-
-
-<div>
+<nav class="docs-nav" aria-labelledby="nav-label">
+  <span id="nav-label" hidden="">main</span>
     {% if site.data.sitenav.toc[0] %}
     <ul>
-        {% for item in site.data.sitenav.toc %}
-        <li><a href="{{ item.url }}">{{ item.title }}</a>
-            {% if item.subfolderitems[0] %}
-            <ul>
-                {% for entry in item.subfolderitems %}
-                <li><a href="{{ entry.url }}">{{ entry.title }}</a>
-                    {% if entry.subsubfolderitems[0] %}
-                    <ul>
-                        {% for subentry in entry.subsubfolderitems %}
-                        <li><a href="{{ subentry.url }}">{{ subentry.title }}</a></li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-                </li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-        </li>
-        {% endfor %}
+      {% for pageitem in site.data.sitenav.toc %}
+      <li><a href="{{ pageitem.url }}" {% if pageitem.url == page.url %}aria-current="true"{% endif %}>{{ pageitem.title }}</a>
+        {% if pageitem.subfolderitems[0] %}
+        <ul>
+          {% for section in pageitem.subfolderitems %}
+          <li><a href="{{ section.url }}">{{ section.title }}</a></li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </li>
+      {% endfor %}
     </ul>
     {% endif %}
-</div>
+</nav>

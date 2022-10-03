@@ -1,4 +1,4 @@
-# The SnipFlow Methodology
+# The SnipFlow methodology
 
 SnipFlow connects version control, issue tracking, CI and non-production environments into a cohesive way of working.
 
@@ -8,29 +8,9 @@ Whatever your current toolset, SnipFlow uses automation and a shared terminology
 
 Tested by many teams over several years, the SnipFlow workflow results in improved developer focus and fewer administrative tasks, along with better transparency for leads and managers, and easier rationalising during complex debugging.
 
-## Read more
-
-- [Why use SnipFlow](#why-use-snipflow)
-- [How SnipFlow works](./how-it-works.md)
-  - [Prerequisites]
-  - [Overview]
-  - [Version control]
-  - [Pull Requests]
-  - [Environments]
-  - [CI/CD]
-  - [ChatOps]
-- [Getting started](./getting-started.md)
-  - [Setting up]
-  - [Onboarding]
-- [Benefits](./benefits.md)
-  - [Easy onboarding]
-  - [Clean versioning]
-  - [Transparency]
-  - [Communication]
-- [Principles](./principles.md)
-
 ## Why use SnipFlow?
-[Why use SnipFlow?]: #why-use-snipflow
+
+[why use snipflow?]: #why-use-snipflow
 
 SnipFlow costs nothing, is easy to understand and onboard teams to, and doesn't replace any of your existing tooling.
 
