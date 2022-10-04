@@ -1,4 +1,4 @@
-# The SnipFlow methodology
+# The SnipFlow workflow
 
 SnipFlow connects version control, issue tracking, CI and non-production environments into a cohesive way of working.
 

@@ -1,7 +1,28 @@
-<header class="page-header" role="banner">
-  <a id="skip-to-content" href="#content" aria-label="link to content section">Skip to the content.</a>
-  <a href="/" id="home-link" aria-label="Link to the project main page"><span>{{ site.title|default:site.github.repository_name }}</span></a>
-  <span id="project-tagline">{{ site.description|default:site.github.project_tagline }}</span>
+<script lang="javascript">
+  function toggleMenuButton(e) {
+    let t = e.target.getAttribute('aria-expanded') === 'true'
+    e.target.setAttribute('aria-expanded', !t)
+  }
+</script>
 
-  {% include nav.html %}
+<header class="page-header" role="banner">
+  {% comment %} <div id="logo">
+    {% endcomment %}
+    <a id="skip-to-content" href="#content" aria-label="link to content section">Skip to the content.</a>
+    <a href="/" id="home-link" aria-label="Link to the project main page"><span>{{ site.title|default:site.github.repository_name }}</span></a>
+    <span id="project-tagline">{{ site.description|default:site.github.project_tagline }}</span>
+    {% comment %}
+  </div> {% endcomment %}
+
+  {% comment %} <div id="navigation">
+    {% endcomment %}
+    <button aria-expanded="false" onclick="toggleMenuButton(event)">
+      <svg class="docs-icon" focusable="false" viewBox="0 0 32 32">
+        <path d="M3,3 29,3 M3,16 29,16 M3,29 29,29"></path>
+      </svg>&nbsp;Menu
+    </button>
+
+    {% include nav.html %}
+    {% comment %}
+  </div> {% endcomment %}
 </header>
