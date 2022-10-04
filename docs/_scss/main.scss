@@ -3,7 +3,7 @@
 :root {
     --ratio: 1.2;
     --measure: 70ch;
-    --fontsize-base: clamp(0.75rem, calc(0.25rem + 2.2222vw), 1.25rem);
+    --fontsize-base: clamp(1rem, calc(0.25rem + 2.2222vw), 1.25rem);
     --s-5: calc(var(--s-4) / var(--ratio));
     --s-4: calc(var(--s-3) / var(--ratio));
     --s-3: calc(var(--s-2) / var(--ratio));
@@ -164,7 +164,7 @@ footer {
 header button {
     cursor: pointer;
     position: fixed;
-    top: calc(var(--s4));
+    top: var(--s2);
     right: var(--s1);
     font-size: var(--s0);
     line-height: 1.1;

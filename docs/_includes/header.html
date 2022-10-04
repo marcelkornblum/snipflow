@@ -1,5 +1,6 @@
 <script lang="javascript">
   function toggleMenuButton(e) {
+    window.scrollTo(0, 0)
     let t = e.target.getAttribute('aria-expanded') === 'true'
     e.target.setAttribute('aria-expanded', !t)
   }
