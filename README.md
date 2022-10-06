@@ -1,4 +1,4 @@
-# SnipFlow ✂〰 Methodology
+# SnipFlow Methodology
 
 > A workflow for productive engineers
 
