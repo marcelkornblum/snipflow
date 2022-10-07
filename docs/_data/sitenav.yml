@@ -1,8 +1,29 @@
 toc:
   - title: Introduction
     url: /
-  - title: Why use SnipFlow
-    url: /#why-use-snipflow
+    subfolderitems:
+      - title: Why use SnipFlow
+        url: /#why-use-snipflow
+  - title: Benefits
+    url: /benefits.html
+    subfolderitems:
+      - title: Easy onboarding
+        url: /benefits.html
+      - title: Clean versioning
+        url: /benefits.html
+      - title: Transparency
+        url: /benefits.html
+      - title: Communication
+        url: /benefits.html
+  - title: Principles
+    url: /principles.html
+  - title: Getting started
+    url: /getting-started.html
+    subfolderitems:
+      - title: Setting up
+        url: /getting-started.html
+      - title: Onboarding
+        url: /getting-started.html
   - title: How SnipFlow works
     url: /how-it-works.html
     subfolderitems:
@@ -20,23 +41,3 @@ toc:
         url: /how-it-works.html#
       - title: ChatOps
         url: /how-it-works.html#
-  - title: Getting started
-    url: /getting-started.html
-    subfolderitems:
-      - title: Setting up
-        url: /getting-started.html
-      - title: Onboarding
-        url: /getting-started.html
-  - title: Benefits
-    url: /benefits.html
-    subfolderitems:
-      - title: Easy onboarding
-        url: /benefits.html
-      - title: Clean versioning
-        url: /benefits.html
-      - title: Transparency
-        url: /benefits.html
-      - title: Communication
-        url: /benefits.html
-  - title: Principles
-    url: /principles.html

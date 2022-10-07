@@ -1,20 +1,12 @@
 # The SnipFlow workflow
 
-SnipFlow connects version control, issue tracking, CI and non-production environments into a cohesive way of working.
+SnipFlow uses automation and a shared terminology to connect the dots between the tools you already use, so your team can focus on the work, not the admin.
 
-It reduces admin and developer context switching, improves communication and transparency between all team members, and scales from side hustles to business critical product teams.
+By connecting version control, CI, issue tracking, hosting environments and even team chat into a cohesive way of working, SnipFlow reduces technical admin and developer context switching, improves communication and transparency between all team members, and scales from side hustles to business critical product teams.
 
-Whatever your current toolset, SnipFlow uses automation and a shared terminology to connect the dots between technical tools - like version control and CI tooling - with project management and communication tools - like issue trackers, team chat and preview environments.
-
-Tested by many teams over several years, the SnipFlow workflow results in improved developer focus and fewer administrative tasks, along with better transparency for leads and managers, and easier rationalising during complex debugging.
+Tested by many teams over several years, the SnipFlow workflow results in improved developer onboarding, focus and productivity, more transparency for leads and managers, and easier rationalising about code during complex debugging. It is also completely free to adopt.
 
 ## Why use SnipFlow?
-
-[why use snipflow?]: #why-use-snipflow
-
-SnipFlow costs nothing, is easy to understand and onboard teams to, and doesn't replace any of your existing tooling.
-
-It gives your team a simple way to connect everything together, easy ways to deploy and places to review your work in various stages, as well as standard terminology, so that communication becomes easier and everyday tasks become simpler and less risky.
 
 There are many tools to help manage aspects of coders' work, but many of them end up needing technical administration, often without warning, which breaks a developer's flow state. SnipFlow abstracts these tasks to automation systems and ChatOps, removing the onus on the individual developer.
 
