@@ -31,7 +31,9 @@
 <circle cx="1536.8" cy="489.485" r="40" fill="white" stroke="#CCCCCC" stroke-width="20"/>
 <path d="M2220.52 459.485L2094.92 242.586H2004.24" stroke="#CCCCCC" stroke-width="20"/>
 <circle r="40" transform="matrix(1 0 0 -1 2249.33 489.485)" fill="white" stroke="#CCCCCC" stroke-width="20"/>
-<circle cx="1253.82" cy="737.822" r="40" fill="white" stroke="black" stroke-width="20"/>
+<circle cx="1821.43" cy="243.138" r="40" fill="white" stroke="black" stroke-width="20"/>
+<circle cx="1536.8" cy="489.485" r="40" fill="white" stroke="black" stroke-width="20"/>
+<circle cx="1971.43" cy="243.138" r="40" fill="white" stroke="black" stroke-width="20"/>
 </g>
 <defs>
 <clipPath id="clip0_7_45">

@@ -91,14 +91,16 @@ All this will mean that the main branch history remains clean and easy to browse
 
 If other team members have added features to the main branch during the lifecycle of your own branch, it's possible that you will have to perform some code merges before being able to close the PR. Snipflow recommends we use rebasing to achieve this; it effectively moves all the feature branch changes to be based on top of the latest commit to the main branch (and once we've squashed them this will be the case anyway).
 
-Typically, if feature branches are short-lives (and they should be) the need for manual intervention during the process is very low.
-
 > This is the only time you should need to use rebasing, which can be very dangerous.
+
+Typically, if feature branches are short-lived (and they should be) the need for manual intervention during the process is very low.
 
 <figure>
     <img src="./assets/images/snipflow-6.svg" alt="The feature branch is merged back to main" />
     <figcaption>The feature branch is merged back to main</figcaption>
 </figure>
+
+At this point the PR environment should be destroyed, and the preview environment will update to reflect the main branch.
 
 ### Releasing
 
@@ -136,8 +138,8 @@ Typically, if feature branches are short-lives (and they should be) the need for
 ### Staging
 
 <figure>
-    <img src="./assets/images/snipflow-envs-test.svg" alt="The test environment is auto-built from the release candidate branch" />
-    <figcaption>The test environment is auto-built from the release candidate branch</figcaption>
+    <img src="./assets/images/snipflow-envs-staging.svg" alt="The staging environment is manually built, either from the release branch or sometimes from main" />
+    <figcaption>The staging environment is manually built, either from the release branch or sometimes from main</figcaption>
 </figure>
 
 ### Test
