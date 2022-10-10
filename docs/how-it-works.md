@@ -36,7 +36,7 @@ The workflow outlined here will be easily recognisable to most developers. We st
 
 This is the **only permanent branch** in our repository; every other branch is deleted unless kept for reference purposes.
 
-### Creating new functionality
+### Writing features
 
 This is the day-to-day workflow for most of the team. Outlined here is the perspective of a single developer (or XD pair), but in real teamwork this will be happening concurrently between various team members, each running this workflow themselves.
 
@@ -45,7 +45,7 @@ This is the day-to-day workflow for most of the team. Outlined here is the persp
     <figcaption>The main branch with a single commit</figcaption>
 </figure>
 
-An engineer starting on a new feature (or issue), will create a new branch directly from the main branch.
+An engineer starting on a new feature (or issue), will create a new branch directly from the main branch. We don't need to be very strict with branch naming as long as it doesn't affect the automation in place; it's common to name the branch `feature/xxx` where `xxx` refers to the ticket number being addressed, but as long as it doesn't start with the protected word `release` SnipFlow doesn't really mind what the name it.
 
 We don't use a `develop` branch since it often ends up being the de facto primary branch in the repository, with the main branch lagging far behind, and needing periodic maintenance in the form of sometimes painful merges.
 
@@ -63,7 +63,7 @@ Commits made on a feature branch are essentially temporary - they won't make it 
     <figcaption>More commits on the feature branch</figcaption>
 </figure>
 
-At some point in development, the coder will be ready to open a [Pull Request](#pull-requests). Since an open PR will result in a new environment[\*](#1), it's common to open PRs early in order to have a central place to discuss functionality with the rest of the team.
+At some point in development, the coder will be ready to open a [Pull Request](#pull-requests). Since an open PR will result in a new [**PR** environment](#pr) [\*](#1), it's common to open PRs early in order to have a central place to discuss functionality with the rest of the team.
 
 This is especially useful if you're working in a cross-disciplinary team where not everybody has easy access to a local environment, but even among devs passing a link is easier than checking out a branch, which may have side effects.
 
@@ -100,35 +100,69 @@ Typically, if feature branches are short-lived (and they should be) the need for
     <figcaption>The feature branch is merged back to main</figcaption>
 </figure>
 
-At this point the PR environment should be destroyed, and the preview environment will update to reflect the main branch.
+At this point the PR environment should be destroyed, the feature branch deleted, and the [**preview** environment](#preview) will update to reflect the main branch.
 
 ### Releasing
+
+It's possible to release very simply from the main branch without most of this process if, for example, you have a small team and quick releases.
+
+Many teams will need a more robust process in order to handle e.g. dedicated testing environment
+and resources that run concurrently to other features being developed. In order therefore to run
+a release prcoess that doesn't interfere with team members that may be working against the main
+branch (and for work that isn't scheduled to be released), the first step is to create a new
+release candidate branch.
+
+This should typically be named `release/xxx` where `xxx` is the next release number. This naming scheme ensures the banch is not easily confused with a feature branch.
+
+Creating a branch according to this naming pattern will auto-deploy the [**test** environment](#test).
 
 <figure>
     <img src="./assets/images/snipflow-7.svg" alt="A new release candidate branch is created" />
     <figcaption>A new release candidate branch is created</figcaption>
 </figure>
 
+During QA it's common to spot easily-fixed issues that shouldn't derail the entire release process. Simply make hotfix commits directly to the release candidate branch, which will auto-update the test environment.
+
 <figure>
     <img src="./assets/images/snipflow-8.svg" alt="A hotfix commit is pushed to the release branch" />
     <figcaption>A hotfix commit is pushed to the release branch</figcaption>
 </figure>
+
+It's usualy to also build a [**staging** environment](#staging) from this branch, unless you're running a simplified release process directly from `main`.
+
+When QA, UAT and any other processes are all completed and passing, it's time to deploy to the [**production** environment](#production).
 
 <figure>
     <img src="./assets/images/snipflow-9.svg" alt="The latest release branch commit is tagged for deployment to production" />
     <figcaption>The latest release branch commit is tagged for deployment to production</figcaption>
 </figure>
 
+This is done by making a tag in the repository, targetting the HEAD of the release candidate branch. The tag should be named with the semver formatted version number of the next release.
+
+> All releases in a SnipFlow repo have a semver-named tag in the repo, so it's easy to go back to the code that's been in production at any given time, in sequence.
+
 <figure>
     <img src="./assets/images/snipflow-10.svg" alt="The release branch is merged back to main" />
     <figcaption>The release branch is merged back to main</figcaption>
 </figure>
 
-### Pull Requests
+After completing the release process, squash-and-merge the release candidate branch back into main (to capture any hotfix commits) and delete the branch.
+
+## Pull Requests
 
 ## Environments
 
+For ongoing projects, SnipFlow encourages 4 permanent environments as well as a temporary environment for each open Pull Request. Many smaller teams don't need the [**test** environment](#test) - if that sounds like you feel free to skip it; it's easy to add to the workflow as and when you need it.
+
+For projects with complex hosting requirements, [**pr** environments](#pr) may not be feasible; the best option is [**developer** environments](#per-developer) (which aren't otherwise necessary).
+
 ### Production
+
+This is the main environment where your project 'lives'. We auto-build it from a tag in the repo (i.e. pointing to s apecific commit) so that it's always easy to find the exact code that went live at any specific time.
+
+The tag should be named according to the [semver](https://semver.org/) versioning system, not least so that the automation can easily use that information.
+
+If you're using a tool that supports it (such as GitHub), it's best to make this tag from the Releases part of the UI, since that allows you to add documentation about the release that's also useful in future.
 
 <figure>
     <img src="./assets/images/snipflow-envs-prod.svg" alt="The production environment is auto-built from the semver-named tag" />
@@ -137,12 +171,18 @@ At this point the PR environment should be destroyed, and the preview environmen
 
 ### Staging
 
+This is the environment used for UAT and for communicating with stakeholders before deployments. In smaller projects you may also want to use it for manual QA.
+
+Since it will be visible to many people and is the focus of a lot of communication, we trigger builds to this environment manually - ideally via [ChatOps](#chatops). Typically, we will want to buildit from the HEAD of the latest release candidate branch, but in smaller teams that don't run the full release process, it is also often built from the main branch.
+
 <figure>
     <img src="./assets/images/snipflow-envs-staging.svg" alt="The staging environment is manually built, either from the release branch or sometimes from main" />
     <figcaption>The staging environment is manually built, either from the release branch or sometimes from main</figcaption>
 </figure>
 
 ### Test
+
+A dedicated environment for QA and related purposes is useful to many teams. This environment is auto-built and updated from the HEAD of the latest release candidate branch.
 
 <figure>
     <img src="./assets/images/snipflow-envs-test.svg" alt="The test environment is auto-built from the release candidate branch" />
@@ -151,29 +191,49 @@ At this point the PR environment should be destroyed, and the preview environmen
 
 ### Preview
 
+This environment is for use by internal team members (as opposed to wider project stakeholders) such as Scrum Masters, PMs, designers, etc.
+
+Often overlooked in other workflow systems, this is a critical piece of SnipFlow's appeal and makes project communication much easier while brining transparency to the process.
+
+Since it auto-builds from the head of the main branch, it represents the current "latest state" of the project - all automated tests etc should have taken place and so it's unlikely that things will be completely broken on this environment, but it's also not uncommon to fin dissues here that would need rectifying before showing the project to wider stakeholder groups.
+
 <figure>
     <img src="./assets/images/snipflow-envs-preview.svg" alt="The preview branch is auto-built from the HEAD of the main branch" />
-    <figcaption>The preview branch is auto-built from the HEAD of the main branch</figcaption>
+    <figcaption>The preview environment is auto-built from the HEAD of the main branch</figcaption>
 </figure>
 
 ### PR
 
+Auto-built from the HEAD of any branch with an open Pull Request, having this environment makes it much easier to review the code and the results of the code before it is merged into the main branch.
+
+For projects with complex hosting it may not be possible to use these environments, in which case it's worth consideringthe next [**per-developer** environment approach], but these should be used where possible.
+
+Ideally the link to the environment will be auto-posted to the Pull Request so it can be found easily.
+
+The environment should be destroyed when the PR is closed.
+
 <figure>
     <img src="./assets/images/snipflow-envs-pr.svg" alt="A temporary PR branch is auto-built from the latest commit to the feature branch" />
-    <figcaption>The preview branch is auto-built from the HEAD of the main branch</figcaption>
+    <figcaption>The PR environment is auto-built from the HEAD of a feature branch containing an open PR</figcaption>
+</figure>
+
+### Per-developer
+
+Not part of the recommended approach, these environments are nevertheless useful when it's not feasible to have many temporary PR environments in operation at once (for example when dealing with a complex or data-heavy back end).
+
+Simply put, this environment should be manually triggered (ideally via [ChatOps](#chatops)) and each developer should have an environment they can control. They should be able to target any given ccommit or the HEAD of any branch, and will typically use it on whichever feature branch they are currently most active on.
+
+<figure>
+    <img src="./assets/images/snipflow-envs-pr.svg" alt="A temporary PR branch is auto-built from the latest commit to the feature branch" />
+    <figcaption>The developer environment is manually built from any given commit, typically from a feature branch</figcaption>
 </figure>
 
 ## CI/CD
 
+All deployments are automated and can be triggered by any team member (so less developer task switching), and only one branch has important code and any settings, so onboarding is simple. Git history is clean and has a 1:1 relationship with your ticketing tool.
+
 ## ChatOps
 
-Use feature branches off your main repository default branch, merging back via "Squash and Merge", ideally through a Pull Request. If you parallel stream a lengthy QA process before deployment move your candidate to a release branch for this. Deploy by making a semver-named tag in the repo, and follow up by merging your release branch back into the main branch. Supplement these with ChatOps commands where needed.
-You'll get environments to review
-Each PR
-The head of the main branch ("latest progress")
-The release candidate
-A staging /UAT build
-Production
-All deployments are automated and can be triggered by any team member (so less developer task switching), and only one branch has important code and any settings, so onboarding is simple. Git history is clean and has a 1:1 relationship with your ticketing tool.
+<hr />
 
 \*[](){:name='1'} This is easily done with statically-hosted projects, but possible with all projects. In case it's not feasible for you, you can run a version of the workflow without PR ernvironments, or with permanent developer-specific environments, although care must be taken when sharing these.

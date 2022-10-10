@@ -8,36 +8,36 @@ toc:
     url: /benefits.html
     subfolderitems:
       - title: Easy onboarding
-        url: /benefits.html
+        url: /benefits.html#easy-onboarding
       - title: Clean versioning
-        url: /benefits.html
+        url: /benefits.html#clean-versioning
       - title: Transparency
-        url: /benefits.html
+        url: /benefits.html#transparency
       - title: Communication
-        url: /benefits.html
+        url: /benefits.html#communication
   - title: Principles
     url: /principles.html
   - title: Getting started
     url: /getting-started.html
     subfolderitems:
       - title: Setting up
-        url: /getting-started.html
+        url: /getting-started.html#setting-up
       - title: Onboarding
-        url: /getting-started.html
+        url: /getting-started.html#onboarding
   - title: How SnipFlow works
     url: /how-it-works.html
     subfolderitems:
       - title: Prerequisites
-        url: /how-it-works.html#
+        url: /how-it-works.html#prerequisites
       - title: Overview
-        url: /how-it-works.html#
+        url: /how-it-works.html#overview
       - title: Version control
-        url: /how-it-works.html#
+        url: /how-it-works.html#version-control
       - title: Pull Requests
-        url: /how-it-works.html#
+        url: /how-it-works.html#pull-requests
       - title: Environments
-        url: /how-it-works.html#
+        url: /how-it-works.html#environments
       - title: CI/CD
-        url: /how-it-works.html#
+        url: /how-it-works.html#cicd
       - title: ChatOps
-        url: /how-it-works.html#
+        url: /how-it-works.html#chatops
