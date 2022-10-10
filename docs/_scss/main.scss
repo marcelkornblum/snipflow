@@ -182,12 +182,17 @@ footer {
 header button {
     cursor: pointer;
     position: fixed;
-    top: var(--s2);
-    right: var(--s1);
     font-size: var(--s0);
     line-height: 1.1;
     padding: var(--s-1);
     display: none;
+}
+
+header #menu-button {
+    cursor: pointer;
+    position: fixed;
+    top: var(--s2);
+    right: var(--s1);
 }
 
 header button svg {
@@ -198,20 +203,29 @@ header button svg {
     fill: none;
 }
 
+header #jump-button {
+    top: var(--s2);
+    left: var(--s1);
+}
+
 nav {
     margin-top: var(--s0);
 }
 
 @media (max-width:866px) {
-    header button {
+    header #menu-button {
         display: block;
+    }
+
+    header #jump-button {
+        display: none;
     }
 
     nav {
         display: none;
     }
 
-    [aria-expanded=true]+nav {
+    [aria-expanded=true]~nav {
         display: block
     }
 }
