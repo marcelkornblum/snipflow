@@ -43,3 +43,5 @@ toc:
         url: /how-it-works.html#chatops
   - title: Resources
     url: /resources.html
+  - title: Differences from GitHub Flow
+    url: /differences-from-githubflow.html
