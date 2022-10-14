@@ -1,0 +1,41 @@
+<svg width="2472" height="858" viewBox="0 0 2472 858" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_7_45)">
+<rect width="2472" height="858" fill="white"/>
+<path d="M1999.24 160.257V80.4001H1943.61V160.257L1971.43 137.441L1999.24 160.257Z" stroke="#CCCCCC" stroke-width="20"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M2009.32 253.138H1853.65V233.138H2009.32V253.138Z" fill="#CCCCCC"/>
+<circle cx="1821.43" cy="243.138" r="40" fill="white" stroke="#CCCCCC" stroke-width="20"/>
+<circle cx="1971.43" cy="243.138" r="40" fill="white" stroke="#CCCCCC" stroke-width="20"/>
+<path d="M1565.61 460.038L1691.21 243.138H1781.88" stroke="#CCCCCC" stroke-width="20"/>
+<circle r="40" transform="matrix(1 0 0 -1 1821.59 243.138)" fill="white" stroke="#CCCCCC" stroke-width="20"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1291.71 746.385H877.036V726.385H1291.71V746.385Z" fill="#CCCCCC"/>
+<circle cx="1103.82" cy="736.385" r="40" fill="white" stroke="#CCCCCC" stroke-width="20"/>
+<circle cx="1253.82" cy="736.385" r="40" fill="white" stroke="#CCCCCC" stroke-width="20"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M963.892 746.385H756.557V726.385H963.892V746.385Z" fill="#CCCCCC"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1000.95 720.764L916.836 769.326L906.836 752.006L990.949 703.443L1000.95 720.764Z" fill="#CCCCCC"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M990.949 769.326L906.836 720.764L916.836 703.443L1000.95 752.006L990.949 769.326Z" fill="#CCCCCC"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M943.892 784.947L943.892 687.822L963.892 687.822L963.892 784.947L943.892 784.947Z" fill="#CCCCCC"/>
+<circle cx="953.892" cy="736.385" r="10" fill="white"/>
+<line x1="908.213" y1="750.62" x2="933.054" y2="736.28" stroke="white"/>
+<line y1="-0.5" x2="28.683" y2="-0.5" transform="matrix(0.866054 0.49995 0.49995 -0.866054 908.463 721.717)" stroke="white"/>
+<line y1="-0.5" x2="28.683" y2="-0.5" transform="matrix(-0.866054 -0.49995 -0.49995 0.866054 999.216 751.053)" stroke="white"/>
+<line x1="999.466" y1="722.15" x2="974.625" y2="736.49" stroke="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M841.785 746.385H427.113V726.385H841.785V746.385Z" fill="#CCCCCC"/>
+<circle cx="653.893" cy="736.385" r="40" fill="white" stroke="#CCCCCC" stroke-width="20"/>
+<circle cx="803.893" cy="736.385" r="40" fill="white" stroke="#CCCCCC" stroke-width="20"/>
+<path d="M247.91 519.485L373.509 736.385H464.184" stroke="#CCCCCC" stroke-width="20"/>
+<circle cx="503.893" cy="736.385" r="40" fill="white" stroke="#CCCCCC" stroke-width="20"/>
+<line y1="509.485" x2="2472" y2="509.485" stroke="#CCCCCC" stroke-width="20"/>
+<line y1="469.485" x2="2472" y2="469.485" stroke="#CCCCCC" stroke-width="20"/>
+<circle cx="219.253" cy="489.485" r="40" fill="white" stroke="#CCCCCC" stroke-width="20"/>
+<path d="M1507.98 519.485L1382.38 736.385H1291.71" stroke="#CCCCCC" stroke-width="20"/>
+<circle cx="1536.8" cy="489.485" r="40" fill="white" stroke="#CCCCCC" stroke-width="20"/>
+<path d="M2220.52 459.485L2094.92 242.586H2004.24" stroke="#CCCCCC" stroke-width="20"/>
+<circle r="40" transform="matrix(1 0 0 -1 2249.33 489.485)" fill="white" stroke="#CCCCCC" stroke-width="20"/>
+<circle cx="2249.33" cy="489.485" r="40" fill="white" stroke="black" stroke-width="20"/>
+</g>
+<defs>
+<clipPath id="clip0_7_45">
+<rect width="2472" height="858" fill="white"/>
+</clipPath>
+</defs>
+</svg>

@@ -1,20 +1,28 @@
-<script lang="javascript">
-  function toggleMenuButton(e) {
-    window.scrollTo(0, 0)
-    let t = e.target.getAttribute('aria-expanded') === 'true'
-    e.target.setAttribute('aria-expanded', !t)
-  }
-</script>
-
 <header class="page-header" role="banner">
-  <a id="skip-to-content" href="#content" aria-label="link to content section">Skip to the content.</a>
-  <a href="/" id="home-link" aria-label="Link to the project main page"><span>{{ site.title|default:site.github.repository_name }}</span></a>
-  <span id="project-tagline">{{ site.description|default:site.github.project_tagline }}</span>
+  <a id="skip-to-content" href="#content" aria-label="link to content section"
+    >Skip to the content.</a
+  >
+  <a href="/" id="home-link" aria-label="Link to the project main page"
+    ><span>{{ site.title|default:site.github.repository_name }}</span></a
+  >
+  <span id="project-tagline"
+    >{{ site.description|default:site.github.project_tagline }}</span
+  >
 
-  <button aria-expanded="false" onclick="toggleMenuButton(event)">
+  <button
+    id="menu-button"
+    aria-expanded="false"
+    onclick="toggleNavExpanded(event)"
+  >
     <svg class="docs-icon" focusable="false" viewBox="0 0 32 32">
-      <path d="M3,3 29,3 M3,16 29,16 M3,29 29,29"></path>
-    </svg>&nbsp;Menu
+      <path d="M3,3 29,3 M3,16 29,16 M3,29 29,29"></path></svg
+    >&nbsp;Menu
+  </button>
+
+  <button id="jump-button" aria-hidden="true" onclick="jumpToTop(event)">
+    <svg class="docs-icon" focusable="false" viewBox="0 0 32 32">
+      <path d="M3,29 16,3 M16,3 29,29"></path></svg
+    >&nbsp;Back to top
   </button>
 
   {% include nav.html %}
