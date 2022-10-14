@@ -150,7 +150,30 @@ After completing the release process, squash-and-merge the release candidate bra
 
 ## Pull Requests
 
-Pull Requests are a very important aspect of SnipFlow. Because we use _squash-and-merge_ to
+Pull Requests are a very important aspect of SnipFlow. While in SnipFlow we don't put any emphasis on individual commits being important (i.e. it doesn't matter what the commit title is, or that it contains either a single or a whole unit of functionality), we **do** put emphasis on all of those things -- and more -- at the PR stage.
+
+Because we use the _squash-and-merge_ strategy for the actual merging in of the PR, the title will become the title of the (single) commit that ends up on the `main` branch, representing all the work that went into this feature -- which we _do_ want to keep "clean".
+
+Git hosts that support PRs generally also generally link the merge commit back to the closed PR page in their UIs. The combination of this and a clean main branch history mean it's easy to use tools like Git Blame but also the repo UI to understand the decisionmaking around a feature.
+
+In order to make the most of that, it's important that a PR:
+
+- Have a concise, descriptive title
+- Have a description containing:
+  - A link to the relevant issue or task
+  - A short description of the changes in the PR from a technical point of view
+  - An outline of the impact of those changes on the codebase and to other developers on the team
+- Contain all tests and test changes relevant to the functionality in the PR
+- Contain all documentation and updates to docs relevant to the code in the PR
+
+Because we will be using CI/CD to push the changes introduced by the PR to the preview environment, and then into releases etc, the PR is the perfect place to ensure code quality. To that end, a PR should ideally also:
+
+- Automatically run all automated tests, especially unit tests
+- Automatically run any other tooling such as linters, security analysis tools, etc.
+- Not be merge-able without all tests passing
+- Not be merge-able without approval from other team members (ideally specific leads and/or principals in the area of code affected)
+
+Please visit the [resources](./resources.md) page for example Pull Request templates you can use to remind the team what should go into a PR.
 
 ## Environments
 
