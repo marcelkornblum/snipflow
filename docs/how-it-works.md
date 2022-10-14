@@ -63,7 +63,7 @@ Commits made on a feature branch are essentially temporary - they won't make it 
     <figcaption>More commits on the feature branch</figcaption>
 </figure>
 
-At some point in development, the coder will be ready to open a [Pull Request](#pull-requests). Since an open PR will result in a new [**PR** environment](#pr) [\*](#1), it's common to open PRs early in order to have a central place to discuss functionality with the rest of the team.
+At some point in development, the coder will be ready to open a [Pull Request](#pull-requests). Since an open PR will result in a new [**PR** environment](#pr) [&spades;](#1){:name='1-source'}, it's common to open PRs early in order to have a central place to discuss functionality with the rest of the team.
 
 This is especially useful if you're working in a cross-disciplinary team where not everybody has easy access to a local environment, but even among devs passing a link is easier than checking out a branch, which may have side effects.
 
@@ -150,6 +150,8 @@ After completing the release process, squash-and-merge the release candidate bra
 
 ## Pull Requests
 
+Pull Requests are a very important aspect of SnipFlow. Because we use _squash-and-merge_ to
+
 ## Environments
 
 For ongoing projects, SnipFlow encourages 4 permanent environments as well as a temporary environment for each open Pull Request. Many smaller teams don't need the [**test** environment](#test) - if that sounds like you feel free to skip it; it's easy to add to the workflow as and when you need it.
@@ -230,10 +232,24 @@ Simply put, this environment should be manually triggered (ideally via [ChatOps]
 
 ## CI/CD
 
-All deployments are automated and can be triggered by any team member (so less developer task switching), and only one branch has important code and any settings, so onboarding is simple. Git history is clean and has a 1:1 relationship with your ticketing tool.
+All deployments are automated, meaning no developer should ever be running builds on their machine that are then pushed to an environment. This reduces technical administration (which can be disruptive) and risk, since it's very easy -- particularly under high stress -- to make mistakes, perhaps involving the wrong environment variables or being in the wrong branch.
+
+The majority of the builds will be automatically triggered, with only production and staging environments typically requiring manual triggering. These manual triggers can be activated by anyone on the team (in practice, this means anyone with write access to the repository, or added to e.g. the relevant Slack channel). This gives trust and ownership to team members and increases agility since people don't have to wait for outside agencies to run deployments.
+
+All builds to any environment should be inspectable by any team member, and in the best case each team member can see which code was built to which environment at what time - this is simple e.g. when using GitHub along with their _deployments_ API. This increases transparency and makes it easier to rationalise about (and debug) running code.
+
+For example scripts you can drop into your project, refer to the [resources](./resources.md) section.
 
 ## ChatOps
 
-<hr />
+For the few manually triggered events in SnipFlow (e.g. deployments to staging environments, or occasional overrides to the process) we've found a ChapOps approach to be very useful.
 
-\*[](){:name='1'} This is easily done with statically-hosted projects, but possible with all projects. In case it's not feasible for you, you can run a version of the workflow without PR ernvironments, or with permanent developer-specific environments, although care must be taken when sharing these.
+In a perfect world there would be a chat channel dedicated to the technical aspects of a project and with all hands-on team members added; this may already contain e.g. notifications from the version control system about repository events, etc.
+
+By connecting this channel to the repo'd manual events it's possible to trigger deployments very easily and transparently. An example implementation of a way to do this can be found in the [deploybot](./resources.md#deploybot) section.
+
+<div class="footnotes">
+
+<a href="#1-source" name="1">&spades;</a> This is easily done with statically-hosted projects, but possible with all projects. In case it's not feasible for you, you can run a version of the workflow without PR ernvironments, or with permanent developer-specific environments, although care must be taken when sharing these.
+
+</div>

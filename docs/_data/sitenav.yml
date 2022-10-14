@@ -45,3 +45,10 @@ toc:
     url: /resources.html
   - title: Differences from GitHub Flow
     url: /differences-from-githubflow.html
+    subfolderitems:
+      - title: Example repository
+        url: /resources.html#example-repository
+      - title: CI/CD scripts
+        url: /resources.html#cicd-scripts
+      - title: Deploybot
+        url: /resources.html#deploybot

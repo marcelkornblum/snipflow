@@ -275,6 +275,11 @@ figcaption {
     text-align: center
 }
 
+.footnotes {
+    border-top: 2px dashed black;
+    padding: var(--s0);
+}
+
 /* Footer */
 
 footer::before {
