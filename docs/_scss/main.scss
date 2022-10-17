@@ -81,7 +81,6 @@ code {
 }
 
 blockquote p {
-    // font-size: var(--s1);
     font-weight: 700;
     padding: 0 var(--s2);
 }
@@ -161,7 +160,6 @@ main {
 header {
     flex-basis: 13rem;
     flex-grow: 1;
-    // display: flex;
     padding-top: var(--s2);
     background-color: black;
     color: white;
@@ -179,25 +177,11 @@ footer {
     max-inline-size: 100vw;
     width: 100vw;
     color: white;
-    padding: var(--s0) 0 var(--s-2) var(--s1);
+    padding-top: var(--s0);
     font-size: var(--s-1);
 
     background: no-repeat black top left/2rem url("../images/icon.svg");
-}
-
-// footer::before {
-//     content: "";
-//     background: no-repeat black top left/2rem url("../images/icon.svg");
-//     padding: var(--s0) 0 var(--s-2) var(--s1);
-//         font-size: var(--s-1);
-// }
-footer::before {
-    content: "";
-    position: relative;
-    right: var(--s1);
-    top: var(--s-4);
-    background-color: white;
-    padding: .35rem .33rem;
+    display: flex;
 }
 
 /* Header and nav */
@@ -305,19 +289,19 @@ figcaption {
 
 /* Footer */
 
-// footer::before {
-//     content: "";
-//     position: relative;
-//     right: var(--s1);
-//     top: var(--s-4);
-//     background-color: white;
-//     padding: .35rem .33rem;
-// }
-
 footer #site-footer-owner {
     display: inline-block;
     width: calc(100% - 0.66rem);
+    height: 100%;
     max-inline-size: 100vw;
     border-top: 2px dashed white;
-    padding-top: .5rem;
+    padding: var(--s0) 0;
+    margin-left: var(--s0);
+}
+
+footer::before {
+    content: "";
+    margin-top: var(--s-1);
+    background-color: white;
+    padding: 0.35rem 0.33rem;
 }
