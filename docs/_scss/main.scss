@@ -97,6 +97,10 @@ h3 {
     font-size: var(--s1);
 }
 
+p a:hover {
+    text-decoration-style: double;
+}
+
 main > * + * {
     margin-top: var(--s3);
 }
@@ -114,18 +118,17 @@ main > * {
     max-width: 35rem;
 }
 
+h1 svg,
+h2 svg,
+h3 svg,
 p svg {
     width: .75em;
     height: .75em;
-    margin: 0 0 .25em .25em;
+    margin: 0 0 0 .25em;
 }
 
-h1 svg,
-h2 svg,
-h3 svg {
-    width: .8em;
-    height: .8em;
-    margin: 0 0 0 .2em;
+p svg {
+    margin-bottom: .25em;
 }
 
 h1 a:hover,
