@@ -114,6 +114,26 @@ main > * {
     max-width: 35rem;
 }
 
+p svg {
+    width: .75em;
+    height: .75em;
+    margin: 0 0 .25em .25em;
+}
+
+h1 svg,
+h2 svg,
+h3 svg {
+    width: .8em;
+    height: .8em;
+    margin: 0 0 0 .2em;
+}
+
+h1 a:hover,
+h2 a:hover,
+h3 a:hover {
+    border-bottom: 0.1em solid black;
+}
+
 #home-link {
     display: block;
     text-decoration: none;
@@ -304,4 +324,9 @@ footer::before {
     margin-top: var(--s-1);
     background-color: white;
     padding: 0.35rem 0.33rem;
+}
+
+#external-link,
+#anchor {
+    visibility: hidden;
 }
