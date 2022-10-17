@@ -61,16 +61,13 @@ footer {
     max-inline-size: none;
 }
 
-h1,
-h2,
-h3 {
-    margin-bottom: 1rem;
-    font-family: 'Gilroy-Heavy', sans-serif;
-    line-height: var(--ratio);
-}
-
 strong {
     font-weight: 700;
+}
+
+ul {
+    list-style-position: inside;
+    padding-left: 1em;
 }
 
 code {
@@ -80,9 +77,12 @@ code {
     padding: 0 .2rem;
 }
 
-blockquote p {
-    font-weight: 700;
-    padding: 0 var(--s2);
+h1,
+h2,
+h3 {
+    margin-bottom: 1rem;
+    font-family: 'Gilroy-Heavy', sans-serif;
+    line-height: var(--ratio);
 }
 
 h1 {
@@ -95,6 +95,11 @@ h2 {
 
 h3 {
     font-size: var(--s1);
+}
+
+blockquote p {
+    font-weight: 700;
+    padding: 0 var(--s2);
 }
 
 p a:hover {
