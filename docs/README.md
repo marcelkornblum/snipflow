@@ -1,6 +1,8 @@
 # The SnipFlow workflow
 
-SnipFlow [builds on](./differences-from-githubflow.md) GitHub Flow to connect the dots between the tools you already use, so your team can focus on the work, not the admin.
+SnipFlow is a way of working for engineering teams. It reduces technical admin and deployment risk while increasing productivity, quality and transparency; it's free and easy to use, and most coders who've used it love it.
+
+It suits [all types of teams](./who-for.md) but is most valuable in a studio environment. It [builds on](./differences-from-githubflow.md) GitHub Flow to connect the dots between the tools you already use, so your team can focus on the work, not the admin.
 
 SnipFlow uses automation and shared terminology; connecting version control, CI, issue tracking, hosting environments and even team chat into a cohesive way of working. It reduces technical admin and developer context switching, improves communication and transparency between all team members, and scales from side hustles to business critical product teams.
 

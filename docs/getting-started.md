@@ -18,6 +18,31 @@ Setting up a project for SnipFlow is fairly simple. You'll want to configure you
 
 Settings
 
+<figure>
+    <img src="./assets/images/gh-settings-nav-general-dark.png" alt="GitHub's settings menu with the General section highlighted" />
+    <figcaption>GitHub's settings menu with the General section highlighted</figcaption>
+</figure>
+
+<figure>
+    <img src="./assets/images/gh-settings-prs-dark.png" alt="GitHub's Pull Request settings pane" />
+    <figcaption>GitHub's Pull Request settings pane</figcaption>
+</figure>
+
+<figure>
+    <img src="./assets/images/gh-settings-nav-branches-dark.png" alt="GitHub's settings menu with the Branches section highlighted" />
+    <figcaption>GitHub's settings menu with the Branches section highlighted</figcaption>
+</figure>
+
+<figure>
+    <img src="./assets/images/gh-settings-branchprotectionrules-dark.png" alt="GitHub's Branch Protection Rules settings pane" />
+    <figcaption>GitHub's Branch Protection Rules settings pane</figcaption>
+</figure>
+
+<figure>
+    <img src="./assets/images/gh-settings-branchprotectionrules-detail-dark.png" alt="GitHub's individual Branch Protection Rules settings pane" />
+    <figcaption>GitHub's individual Branch Protection Rules settings pane</figcaption>
+</figure>
+
 templates
 
 ### Hosting
