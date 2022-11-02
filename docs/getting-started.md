@@ -6,7 +6,7 @@ Although you can use any tooling with SnipFlow, we'll illustrate the steps with 
 
 - Git version control, hosted by [GitHub](https://github.com)
 - [GitHub Actions](https://github.com/features/actions) for the CI/CD automation
-- [AWS Amplify](https://aws.amazon.com/amplify/) for project hosting
+- [Vercel](https://vercel.com) for project hosting
 - Task / issue tracking using [GitHub Issues and Projects](https://github.com/features/issues)
 - Team collaboration using [Slack](https://slack.com/)
 
@@ -59,9 +59,13 @@ After updating all the settings, you may want to add [templates](./resources.md#
 
 ### Hosting
 
-setting up
+How your hosting is configured is really up to you and the requirements of your project. In order to ensure SnipFlow works, you just have to ensure that
 
-disabling automation
+- You can easily have multiple environments for your project (ideally with some that can be auto-created and -destroyed)
+- You have no "auto-deployment" features from your hosting setup enabled; we will control all all our builds via our own CI/CD scripts, set up in the next section
+- You are able to push built code to your hosting environment using automations
+
+In Vercel, we will configure our project to use the [Vercel API](https://vercel.com/docs/rest-api#endpoints/deployments/create-a-new-deployment) for deployments rather than any of the other options.
 
 ### CI/CD and automation
 
