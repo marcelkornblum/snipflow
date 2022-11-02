@@ -61,16 +61,13 @@ footer {
     max-inline-size: none;
 }
 
-h1,
-h2,
-h3 {
-    margin-bottom: 1rem;
-    font-family: 'Gilroy-Heavy', sans-serif;
-    line-height: var(--ratio);
-}
-
 strong {
     font-weight: 700;
+}
+
+ul {
+    list-style-position: inside;
+    padding-left: 1em;
 }
 
 code {
@@ -80,10 +77,12 @@ code {
     padding: 0 .2rem;
 }
 
-blockquote p {
-    // font-size: var(--s1);
-    font-weight: 700;
-    padding: 0 var(--s2);
+h1,
+h2,
+h3 {
+    margin-bottom: 1rem;
+    font-family: 'Gilroy-Heavy', sans-serif;
+    line-height: var(--ratio);
 }
 
 h1 {
@@ -96,6 +95,15 @@ h2 {
 
 h3 {
     font-size: var(--s1);
+}
+
+blockquote p {
+    font-weight: 700;
+    padding: 0 var(--s2);
+}
+
+p a:hover {
+    text-decoration-style: double;
 }
 
 main > * + * {
@@ -113,6 +121,25 @@ main > * {
     margin-left: auto;
     margin-right: auto;
     max-width: 35rem;
+}
+
+h1 svg,
+h2 svg,
+h3 svg,
+p svg {
+    width: .75em;
+    height: .75em;
+    margin: 0 0 0 .25em;
+}
+
+p svg {
+    margin-bottom: .25em;
+}
+
+h1 a:hover,
+h2 a:hover,
+h3 a:hover {
+    border-bottom: 0.1em solid black;
 }
 
 #home-link {
@@ -139,10 +166,18 @@ main > * {
  ***********************************************************
  */
 
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: black;
+}
+
 #page {
     display: flex;
     flex-wrap: wrap;
     min-width: 320px;
+    background-color: white;
 }
 
 header,
@@ -153,7 +188,6 @@ main {
 header {
     flex-basis: 13rem;
     flex-grow: 1;
-    // display: flex;
     padding-top: var(--s2);
     background-color: black;
     color: white;
@@ -167,15 +201,16 @@ main {
 }
 
 footer {
-    max-width: 100vw;
-    // background-color: black;
-    // outline: white dashed 3px;
-    background: no-repeat black top left/2rem url("../images/icon.svg");
+    flex-grow: 999;
+    max-inline-size: 100vw;
+    width: 100vw;
     color: white;
-    padding: var(--s0) 0 var(--s-2) var(--s1);
+    padding-top: var(--s0);
     font-size: var(--s-1);
-}
 
+    background: no-repeat black top left/2rem url("../images/icon.svg");
+    display: flex;
+}
 
 /* Header and nav */
 
@@ -282,19 +317,24 @@ figcaption {
 
 /* Footer */
 
-footer::before {
-    content: "";
-    position: relative;
-    right: var(--s1);
-    top: var(--s-4);
-    background-color: white;
-    padding: .35rem .33rem;
-}
-
 footer #site-footer-owner {
     display: inline-block;
     width: calc(100% - 0.66rem);
+    height: 100%;
     max-inline-size: 100vw;
     border-top: 2px dashed white;
-    padding-top: .5rem;
+    padding: var(--s0) 0;
+    margin-left: var(--s0);
+}
+
+footer::before {
+    content: "";
+    margin-top: var(--s-1);
+    background-color: white;
+    padding: 0.35rem 0.33rem;
+}
+
+#external-link,
+#anchor {
+    visibility: hidden;
 }
