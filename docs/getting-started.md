@@ -16,34 +16,46 @@ Setting up a project for SnipFlow is fairly simple. You'll want to configure you
 
 ### Repository
 
-Settings
+The main repository configuration is to enforce the squash and merge PR strategy. Start by visiting the Settings page of your repository, under the "General" tab.
 
 <figure>
     <img src="./assets/images/gh-settings-nav-general-dark.png" alt="GitHub's settings menu with the General section highlighted" />
     <figcaption>GitHub's settings menu with the General section highlighted</figcaption>
 </figure>
 
+Scroll to the "Pull Requests" section, and ensure "Allow squash merging" is the only selected option of the (usually) 3 available. Github has a sub-option in this section to default the resulting commit message to the PR title and description, which is ideal for SnipFlow.
+
+For repo cleanliness, you may also want to automatically delete head branches - this means that after a PR is merged the relevant branch is deleted, making it easier for people to find relevant branches when needed.
+
 <figure>
     <img src="./assets/images/gh-settings-prs-dark.png" alt="GitHub's Pull Request settings pane" />
     <figcaption>GitHub's Pull Request settings pane</figcaption>
 </figure>
+
+Next, we need to ensure that PRs are enforced for any updates to the `main` branch. Go to the "Branches" section of the settings navigation.
 
 <figure>
     <img src="./assets/images/gh-settings-nav-branches-dark.png" alt="GitHub's settings menu with the Branches section highlighted" />
     <figcaption>GitHub's settings menu with the Branches section highlighted</figcaption>
 </figure>
 
+You then need to set up a protection rule set for the `main` branch, and hit the "Edit" button.
+
 <figure>
     <img src="./assets/images/gh-settings-branchprotectionrules-dark.png" alt="GitHub's Branch Protection Rules settings pane" />
     <figcaption>GitHub's Branch Protection Rules settings pane</figcaption>
 </figure>
+
+Within that branch protection rules pane, the only full requirement is to enable "Require a pull request before merging".
+
+It's a good idea to also select "Require approvals", "Require status checks to pass before merging" and "Require conversation resolution before merging". Many teams also want further restrictions in place.
 
 <figure>
     <img src="./assets/images/gh-settings-branchprotectionrules-detail-dark.png" alt="GitHub's individual Branch Protection Rules settings pane" />
     <figcaption>GitHub's individual Branch Protection Rules settings pane</figcaption>
 </figure>
 
-templates
+After updating all the settings, you may want to add [templates](./resources.md#samples-and-resources) to your repository, to help ensure that standards are met when e.g. opening Pull Requests.
 
 ### Hosting
 
