@@ -4,13 +4,8 @@ toc:
     subfolderitems:
       - title: Why use SnipFlow
         url: /#why-use-snipflow
-  - title: Getting started
-    url: /getting-started.html
-    subfolderitems:
-      - title: Setting up
-        url: /getting-started.html#setting-up
-      - title: Onboarding
-        url: /getting-started.html#onboarding
+  - title: Who it's for
+    url: /who-for.html
   - title: Benefits
     url: /benefits.html
     subfolderitems:
@@ -22,8 +17,6 @@ toc:
         url: /benefits.html#transparency
       - title: Communication
         url: /benefits.html#communication
-  - title: Principles
-    url: /principles.html
   - title: How SnipFlow works
     url: /how-it-works.html
     subfolderitems:
@@ -41,10 +34,19 @@ toc:
         url: /how-it-works.html#cicd
       - title: ChatOps
         url: /how-it-works.html#chatops
+  - title: Getting started
+    url: /getting-started.html
+    subfolderitems:
+      - title: Setting up
+        url: /getting-started.html#setting-up
+      - title: Onboarding
+        url: /getting-started.html#onboarding
+  - title: Principles
+    url: /principles.html
+  - title: Not just GitHub Flow
+    url: /differences-from-githubflow.html
   - title: Resources
     url: /resources.html
-  - title: Differences from GitHub Flow
-    url: /differences-from-githubflow.html
     subfolderitems:
       - title: Example repository
         url: /resources.html#example-repository

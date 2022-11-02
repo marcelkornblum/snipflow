@@ -4,7 +4,7 @@ title: Principles
 
 # Principles
 
-> The main guiding principles behind SnipFlow
+The main guiding principles behind SnipFlow
 
 ## Time and flow
 
@@ -12,15 +12,15 @@ Your time is valuable
 
 The most valuable things you do need long unbroken stretches of time
 
+## Transparency
+
+Your colleagues need to be able to check on progress, and their timetables are different to yours
+
 ## Simplicity and cost
 
 Complex methodologies lead to shortcuts, or individuals responsible for maintaining them, or at least extra documentation, and longer onboarding
 
 Fewer tools and simpler integrations mean less maintenance and higher productivity
-
-## Transparency
-
-Your colleagues need to be able to check on progress, and their timetables are different to yours
 
 ## Risk and automation
 
