@@ -30,4 +30,8 @@ By mandating that PRs use the `squash-and-merge` strategy, the ultimate aim of a
 
 ## Transparency
 
-## Communication
+SnipFlow makes it very easy for teams to be transparent about their ongoing work, whatever stage it's at. It standardises various [environments](./how-it-works.md#environments) where all team members can easily review progress and see features in action as they're developed, reviewed, tested and deployed.
+
+By putting the focus of both the automation and code quality onto the Pull Request process, SnipFlow encourages developers to open PRs often and early, which helps with team visibility of both code and output, in turn helping leads catch issues early and guide developers architectural choices before they need a lot of change.
+
+Since it becomes very simple for coders to show their work to leads or to PMs without switching context or losing focus, over time teams that use SnipFlow tend to work in this way naturally.
