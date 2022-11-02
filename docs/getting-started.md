@@ -19,7 +19,7 @@ Setting up a project for SnipFlow is fairly simple. You'll want to configure you
 The main repository configuration is to enforce the squash and merge PR strategy. Start by visiting the Settings page of your repository, under the "General" tab.
 
 <figure>
-    <img src="./assets/images/gh-settings-nav-general-dark.png" alt="GitHub's settings menu with the General section highlighted" />
+    <img src="./assets/images/gh-settings-nav-general-dark.png" alt="GitHub's settings menu with the General section highlighted" class="narrow" />
     <figcaption>GitHub's settings menu with the General section highlighted</figcaption>
 </figure>
 
@@ -35,7 +35,7 @@ For repo cleanliness, you may also want to automatically delete head branches - 
 Next, we need to ensure that PRs are enforced for any updates to the `main` branch. Go to the "Branches" section of the settings navigation.
 
 <figure>
-    <img src="./assets/images/gh-settings-nav-branches-dark.png" alt="GitHub's settings menu with the Branches section highlighted" />
+    <img src="./assets/images/gh-settings-nav-branches-dark.png" alt="GitHub's settings menu with the Branches section highlighted" class="narrow" />
     <figcaption>GitHub's settings menu with the Branches section highlighted</figcaption>
 </figure>
 
