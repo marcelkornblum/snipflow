@@ -79,5 +79,43 @@ function handleOnResize(e) {
   }
 }
 
+function decorateAnchors() {
+  // add external link icon to relevant links in main content
+  const mainContentNode = document.getElementsByTagName("main")[0];
+  const links = mainContentNode.getElementsByTagName("a");
+  const externalLinkSvgObject =
+    document.getElementById("external-link").contentDocument;
+  const externalLinkSvg = externalLinkSvgObject.getElementsByTagName("svg")[0];
+
+  for (let link of links) {
+    // only external ones
+    if (link.attributes.href.value.startsWith("http")) {
+      link.outerHTML += externalLinkSvg.outerHTML;
+    }
+  }
+
+  // add anchor icon to headings in main content
+  const h1Headings = Array.from(mainContentNode.getElementsByTagName("h1"));
+  const h2Headings = Array.from(mainContentNode.getElementsByTagName("h2"));
+  const h3Headings = Array.from(mainContentNode.getElementsByTagName("h3"));
+  let headings = h1Headings.concat(h2Headings, h3Headings);
+  const anchorSvgObject = document.getElementById("anchor").contentDocument;
+  const anchorSvg = anchorSvgObject.getElementsByTagName("svg")[0];
+
+  for (let heading of headings) {
+    heading.innerHTML +=
+      "<a href='#" +
+      heading.attributes.id.value +
+      "' alt='link to this anchor'>" +
+      anchorSvg.outerHTML +
+      "</a>";
+  }
+}
+
 window.onresize = handleOnResize;
-handleOnResize();
+
+window.addEventListener("resize", handleOnResize);
+window.addEventListener("load", function () {
+  handleOnResize();
+  decorateAnchors();
+});
