@@ -76,7 +76,7 @@ jobs:
 
       - name: Deploy to AWS Amplify
         run: |
-          if [[ "${{ github.event.deployment.environment }}" =~ ^pr[0-9]*$ ]];
+          if [[ "${{ github.event.deployment.environment }}" =~ ^pr[0-9]*$ ]]; then
             aws amplify create-branch --app-id "${{ env.AMPLIFY_APPID }}" --branch-name "${{ github.event.deployment.environment }}"
           fi
 
