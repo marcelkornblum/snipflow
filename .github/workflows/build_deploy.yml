@@ -61,7 +61,7 @@ jobs:
               repo: context.repo.repo,
             })
 
-            return result.artifacts[0].archive_download_url
+            return result
 
       # - name: Get Artifact URL
       #   run: |
