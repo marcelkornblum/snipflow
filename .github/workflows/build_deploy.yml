@@ -49,30 +49,6 @@ jobs:
           zip -r ${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}.zip ./_site/*
           echo $(aws s3 cp ${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}.zip s3://${{ env.ARTIFACT_BUCKET }}/)
 
-      # - name: Archive build artifacts
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: ${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}
-      #     path: ./_site/*
-
-      # deploy:
-      #   runs-on: ubuntu-latest
-      #   needs: build
-      #   steps:
-      # - name: Checkout
-      #   uses: actions/checkout@v3
-
-      # - name: Get workflow artifacts
-      #   id: get_artifacts
-      #   uses: actions/github-script@v6
-      #   with:
-      #     script: |
-      #       const result = await github.rest.actions.listWorkflowRunArtifacts({
-      #         run_id: ${{ github.run_id }},
-      #         owner: context.repo.owner,
-      #         repo: context.repo.repo,
-      #       })
-
       - name: Deploy to AWS Amplify
         run: |
           # if we're on a PR environment, it may not exist on AWS yet
@@ -87,7 +63,7 @@ jobs:
             fi
           fi
 
-          ARCHIVE_URL=echo "${{steps.get_artifacts.outputs.result}}" | jq ".artifacts[0].archive_download_url"
+          ARCHIVE_URL="https://${{ env.ARTIFACT_BUCKET }}.s3.eu-west-2.amazonaws.com/${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}.zip"
 
           echo "deploying to ${{ github.event.deployment.environment }} using ${ARCHIVE_URL}"
 
@@ -97,13 +73,6 @@ jobs:
             --source-url "${ARCHIVE_URL}")
 
           echo $DEPLOY_CMD
-
-          # DEPLOY_CMD=$(aws amplify start-deployment \
-          #   --app-id "${{ env.AMPLIFY_APPID }}" \
-          #   --branch-name "preview" \
-          #   --source-url "${ARCHIVE_URL}")
-
-          # echo $DEPLOY_CMD
 
       - name: Get ENV URL for GH Deployment update
         run: |
