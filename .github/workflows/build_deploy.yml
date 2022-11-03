@@ -65,7 +65,7 @@ jobs:
 
       - name: Create build archive / ZIP
         run: |
-          zip -r "snipflow-${{ github.event.deployment.id }}.zip" ./docs/_site/
+          zip -r "snipflow-${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}.zip" ./_site/*
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
