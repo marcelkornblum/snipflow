@@ -14,7 +14,7 @@ jobs:
         id: create_deployment
         uses: actions/github-script@v6
         with:
-          github-token: "${{ secrets.GIT_TOKEN }}"
+          github-token: "${{ secrets.GH_TOKEN }}"
           script: |
             github.rest.repos.createDeployment({
               environment: "production",
