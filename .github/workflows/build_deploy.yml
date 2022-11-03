@@ -49,22 +49,22 @@ jobs:
           zip -r ${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}.zip ./_site/*
           echo $(aws s3 cp ${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}.zip s3://${{ env.ARTIFACT_BUCKET }}/)
 
-      - name: Deploy to AWS Amplify
+      - name: Create Amplify environment
+        if: github.event.deployment.environment =~ ^pr[0-9]*$
         continue-on-error: true
         run: |
-          # if we're on a PR environment, it may not exist on AWS yet
-          if [[ "${{ github.event.deployment.environment }}" =~ ^pr[0-9]*$ ]]; then
-            GET_PR_ENV_CMD=$(aws amplify get-branch \
-              --app-id "${{ env.AMPLIFY_APPID }}" \
-              --branch-name "${{ github.event.deployment.environment }}" \
-              )
+          GET_PR_ENV_CMD=$(aws amplify get-branch \
+            --app-id "${{ env.AMPLIFY_APPID }}" \
+            --branch-name "${{ github.event.deployment.environment }}" \
+            )
 
-            if (( $? != 0 )); then
-              echo "creating Amplify environment ${{ github.event.deployment.environment }}"
-              aws amplify create-branch --app-id "${{ env.AMPLIFY_APPID }}" --branch-name "${{ github.event.deployment.environment }}"
-            fi
+          if (( $? != 0 )); then
+            echo "creating Amplify environment ${{ github.event.deployment.environment }}"
+            aws amplify create-branch --app-id "${{ env.AMPLIFY_APPID }}" --branch-name "${{ github.event.deployment.environment }}"
           fi
 
+      - name: Deploy to AWS Amplify
+        run: |
           ARCHIVE_URL="https://${{ env.ARTIFACT_BUCKET }}.s3.eu-west-2.amazonaws.com/${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}.zip"
 
           echo "deploying to ${{ github.event.deployment.environment }} using ${ARCHIVE_URL}"
