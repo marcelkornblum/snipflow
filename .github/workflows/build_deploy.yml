@@ -51,10 +51,10 @@ jobs:
           cd ..
           echo $(aws s3 cp ${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}.zip s3://${{ env.ARTIFACT_BUCKET }}/)
 
-      - name: Create Amplify environment
-        if: github.event.deployment.environment =~ ^pr[0-9]*$
+      - name: Create Amplify environment 
         continue-on-error: true
         run: |
+          if [ ${{ github.event.deployment.environment }} =~ ^pr[0-9]*$ ]; then
           GET_PR_ENV_CMD=$(aws amplify get-branch \
             --app-id "${{ env.AMPLIFY_APPID }}" \
             --branch-name "${{ github.event.deployment.environment }}" \
@@ -63,6 +63,7 @@ jobs:
           if (( $? != 0 )); then
             echo "creating Amplify environment ${{ github.event.deployment.environment }}"
             aws amplify create-branch --app-id "${{ env.AMPLIFY_APPID }}" --branch-name "${{ github.event.deployment.environment }}"
+          fi
           fi
 
       - name: Deploy to AWS Amplify
