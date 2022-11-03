@@ -54,7 +54,7 @@ jobs:
       - name: Create Amplify environment 
         continue-on-error: true
         run: |
-          if [ ${{ github.event.deployment.environment }} =~ ^pr[0-9]*$ ]; then
+          if [ "${{ github.event.deployment.environment }}" =~ ^pr[0-9]*$ ]; then
           GET_PR_ENV_CMD=$(aws amplify get-branch \
             --app-id "${{ env.AMPLIFY_APPID }}" \
             --branch-name "${{ github.event.deployment.environment }}" \
