@@ -68,10 +68,10 @@ jobs:
       - name: Deploy to AWS Amplify
         run: |
           # if we're on a PR environment, it may not exist
+
           if [[ "${{ github.event.deployment.environment }}" =~ ^pr[0-9]*$ ]]; then
-            if (( $(aws amplify get-branch --app-id "${{ env.AMPLIFY_APPID }}" --branch-name "${{ github.event.deployment.environment }}") )); then
-              echo "Amplify environment ${{ github.event.deployment.environment }} exists..."
-            else
+            GET_PR_ENV_CMD=$(aws amplify get-branch --app-id "${{ env.AMPLIFY_APPID }}" --branch-name "${{ github.event.deployment.environment }}")
+            if (( $? != 0 )); then
               echo "creating Amplify environment ${{ github.event.deployment.environment }}"
               aws amplify create-branch --app-id "${{ env.AMPLIFY_APPID }}" --branch-name "${{ github.event.deployment.environment }}"
             fi
