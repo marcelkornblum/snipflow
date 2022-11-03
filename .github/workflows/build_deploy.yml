@@ -46,23 +46,28 @@ jobs:
 
       - name: Create ZIP and upload to S3
         run: |
-          zip -r ${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}.zip ./_site/*
+          cd ./_site/
+          zip -r ../${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}.zip *
+          cd ..
           echo $(aws s3 cp ${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}.zip s3://${{ env.ARTIFACT_BUCKET }}/)
+
+      - name: Create Amplify environment 
+        continue-on-error: true
+        run: |
+          if [[ "${{ github.event.deployment.environment }}" =~ ^pr[0-9]*$ ]]; then
+            {
+              GET_PR_ENV_CMD=$(aws amplify get-branch \
+                --app-id "${{ env.AMPLIFY_APPID }}" \
+                --branch-name "${{ github.event.deployment.environment }}" \
+                )
+            } || {
+              echo "creating Amplify environment ${{ github.event.deployment.environment }}"
+              aws amplify create-branch --app-id "${{ env.AMPLIFY_APPID }}" --branch-name "${{ github.event.deployment.environment }}"
+            }
+          fi
 
       - name: Deploy to AWS Amplify
         run: |
-          # if we're on a PR environment, it may not exist on AWS yet
-          if [[ "${{ github.event.deployment.environment }}" =~ ^pr[0-9]*$ ]]; then
-            GET_PR_ENV_CMD=$(aws amplify get-branch \
-              --app-id "${{ env.AMPLIFY_APPID }}" \
-              --branch-name "${{ github.event.deployment.environment }}")
-
-            if (( $? != 0 )); then
-              echo "creating Amplify environment ${{ github.event.deployment.environment }}"
-              aws amplify create-branch --app-id "${{ env.AMPLIFY_APPID }}" --branch-name "${{ github.event.deployment.environment }}"
-            fi
-          fi
-
           ARCHIVE_URL="https://${{ env.ARTIFACT_BUCKET }}.s3.eu-west-2.amazonaws.com/${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}.zip"
 
           echo "deploying to ${{ github.event.deployment.environment }} using ${ARCHIVE_URL}"

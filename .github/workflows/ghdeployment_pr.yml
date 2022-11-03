@@ -41,7 +41,7 @@ jobs:
             github.rest.repos.createDeployment({
               environment: "preview",
               auto_merge: false,
-              ref: "${{ github.event.pull_request.head.ref }}",
+              ref: "${{ github.event.pull_request.base.ref }}",
               description: "Auto preview deployment",
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -52,6 +52,9 @@ jobs:
     if: ${{ github.event.pull_request.merged }}
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: Get Project ENV vars
         uses: ./.github/actions/setvars
 
