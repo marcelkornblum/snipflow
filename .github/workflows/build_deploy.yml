@@ -28,32 +28,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      # - name: Cache Gems
-      #   uses: actions/cache@v3
-      #   with:
-      #     path: vendor/bundle
-      #     key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-gems-
-
-      # - name: Get Project ENV vars
-      #   uses: ./.github/actions/setvars
-
-      # Uncomment for debugging
-      # - name: View context attributes
-      #   uses: actions/github-script@v6
-      #   with:
-      #     script: console.log(context)
-
       - name: Run Jekyll build
         uses: actions/jekyll-build-pages@v1.0.6
         with:
           token: ${{ secrets.GH_TOKEN }}
           source: ./docs/
-
-      # - name: Create build archive / ZIP
-      #   run: |
-      #     zip -r "snipflow-${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}.zip" ./_site/*
 
       - name: Archive build artifacts
         uses: actions/upload-artifact@v3
@@ -89,7 +68,7 @@ jobs:
       - name: Deploy to AWS Amplify
         run: |
           if [[ "${{ github.event.deployment.environment }}" =~ ^pr[0-9]*$ ]]; then
-            if [[ aws amplify get-branch --app-id "${{ env.AMPLIFY_APPID }}" --branch-name "${{ github.event.deployment.environment }}" ]]; then
+            if [ aws amplify get-branch --app-id "${{ env.AMPLIFY_APPID }}" --branch-name "${{ github.event.deployment.environment }}" ]; then
               echo "Amplify environment ${{ github.event.deployment.environment }} exists..."
             else
               echo "creating Amplify environment ${{ github.event.deployment.environment }}"
