@@ -1,21 +1,20 @@
 # Runs all project tests, build process and deployment to hosting env
 # triggered by GH Deployment event
-name: "Test / Build / Deploy"
+name: "Build & Deploy"
 
 on: deployment
 
 permissions: write-all
 
 jobs:
-  deploy:
-    name: Test, Build, Deploy
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
       - name: Cache Gems
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: vendor/bundle
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}
@@ -66,6 +65,26 @@ jobs:
       - name: Create build archive / ZIP
         run: |
           zip -r "snipflow-${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}.zip" ./_site/*
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Get Project ENV vars
+        uses: ./.github/actions/setvars
+
+      - name: Derive build-specific ENV vars
+        run: |
+          if [[ "${{ github.event.deployment.environment }}" =~ ^pr(eview|[0-9])*$ ]]; then
+            echo "ENV_URL=${{ env.ENV_URL_PREVIEW }}/${{ github.event.deployment.environment }}/" >> $GITHUB_ENV
+          elif [[ "${{ github.event.deployment.environment }}" == "staging" ]]; then
+            echo "ENV_URL=${{ env.ENV_URL_STAGING }}" >> $GITHUB_ENV
+          elif [[ "${{ github.event.deployment.environment }}" == "production" ]]; then
+            echo "ENV_URL=${{ env.ENV_URL_PRODUCTION }}" >> $GITHUB_ENV
+          fi
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
