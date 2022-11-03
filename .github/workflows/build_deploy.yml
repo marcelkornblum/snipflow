@@ -67,22 +67,38 @@ jobs:
 
       - name: Deploy to AWS Amplify
         run: |
-          # if we're on a PR environment, it may not exist
-
+          # if we're on a PR environment, it may not exist on AWS yet
           if [[ "${{ github.event.deployment.environment }}" =~ ^pr[0-9]*$ ]]; then
-            GET_PR_ENV_CMD=$(aws amplify get-branch --app-id "${{ env.AMPLIFY_APPID }}" --branch-name "${{ github.event.deployment.environment }}")
+            GET_PR_ENV_CMD=$(aws amplify get-branch \
+              --app-id "${{ env.AMPLIFY_APPID }}" \
+              --branch-name "${{ github.event.deployment.environment }}")
+
             if (( $? != 0 )); then
               echo "creating Amplify environment ${{ github.event.deployment.environment }}"
               aws amplify create-branch --app-id "${{ env.AMPLIFY_APPID }}" --branch-name "${{ github.event.deployment.environment }}"
             fi
           fi
 
-          aws amplify start-deployment --app-id "${{ env.AMPLIFY_APPID }}" --branch-name "${{ github.event.deployment.environment }}" --source-url "${ARCHIVE_URL}" --debug
+          echo "deploying to ${{ github.event.deployment.environment }} using ${ARCHIVE_URL}"
+
+          DEPLOY_CMD=$(aws amplify start-deployment \
+            --app-id "${{ env.AMPLIFY_APPID }}" \
+            --branch-name "${{ github.event.deployment.environment }}" \
+            --source-url "${ARCHIVE_URL}")
+
+          echo $DEPLOY_CMD
+
+          DEPLOY_CMD=$(aws amplify start-deployment \
+            --app-id "${{ env.AMPLIFY_APPID }}" \
+            --branch-name "preview" \
+            --source-url "${ARCHIVE_URL}")
+
+          echo $DEPLOY_CMD
 
       - name: Get ENV URL for GH Deployment update
         run: |
-          if [[ "${{ github.event.deployment.environment }}" =~ ^pr(eview|[0-9])*$ ]]; then
-            echo "ENV_URL=${{ env.ENV_URL_PREVIEW }}/${{ github.event.deployment.environment }}/" >> $GITHUB_ENV
+          if [[ "${{ github.event.deployment.environment }}" == "preview" ]]; then
+            echo "ENV_URL=${{ env.ENV_URL_PREVIEW }}" >> $GITHUB_ENV
           elif [[ "${{ github.event.deployment.environment }}" == "staging" ]]; then
             echo "ENV_URL=${{ env.ENV_URL_STAGING }}" >> $GITHUB_ENV
           elif [[ "${{ github.event.deployment.environment }}" == "production" ]]; then
