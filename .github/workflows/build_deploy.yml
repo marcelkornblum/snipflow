@@ -46,7 +46,9 @@ jobs:
 
       - name: Create ZIP and upload to S3
         run: |
-          zip -r ${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}.zip ./_site/*
+          cd ./_site/
+          zip -r ../${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}.zip *
+          cd ..
           echo $(aws s3 cp ${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}.zip s3://${{ env.ARTIFACT_BUCKET }}/)
 
       - name: Create Amplify environment
