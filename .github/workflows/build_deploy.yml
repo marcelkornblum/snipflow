@@ -58,7 +58,7 @@ jobs:
             })
 
       - name: Run Jekyll build
-        uses: actions/jekyll-build-pages@1.0.6
+        uses: actions/jekyll-build-pages@v1.0.6
         with:
           token: ${{ secrets.GH_TOKEN }}
           source: ./docs/
