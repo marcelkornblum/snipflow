@@ -28,13 +28,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Cache Gems
-        uses: actions/cache@v3
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
+      # - name: Cache Gems
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: vendor/bundle
+      #     key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-gems-
 
       # - name: Get Project ENV vars
       #   uses: ./.github/actions/setvars
@@ -65,13 +65,21 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      # - name: Checkout
-      #   uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
       - name: Get Project ENV vars
         uses: ./.github/actions/setvars
 
-      - name: Configure AWS Credentials
+      - name: Get Artifact URL
+        run: |
+          ARCHIVE_URL=$(curl \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ env.GH_TOKEN }}" \
+            https://api.github.com/repos/marcelkornblum/snipflow/actions/artifacts?name=snipflow-${{ github.event.deployment.environment }}-${{ github.event.deployment.id }} | jq ".artifacts[0].archive_download_url")
+          echo "ARCHIVE_URL=${ARCHIVE_URL}" >> $GITHUB_ENV
+
+      - name: Set AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -84,7 +92,7 @@ jobs:
             aws amplify create-branch --app-id "${{ env.AMPLIFY_APPID }}" --branch-name "${{ github.event.deployment.environment }}"
           fi
 
-          aws amplify start-deployment --app-id "${{ env.AMPLIFY_APPID }}" --branch-name "${{ github.event.deployment.environment }}" --source-url
+          aws amplify start-deployment --app-id "${{ env.AMPLIFY_APPID }}" --branch-name "${{ github.event.deployment.environment }}" --source-url "${ARCHIVE_URL}"
 
       - name: Update GH Deployment status to "success"
         id: ccreate_success_status
