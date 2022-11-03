@@ -28,6 +28,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Get Project ENV vars
+        uses: ./.github/actions/setvars
+
+      - name: Set AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
       - name: Run Jekyll build
         uses: actions/jekyll-build-pages@v1.0.6
         with:
@@ -37,7 +47,6 @@ jobs:
       - name: Create ZIP and upload to S3
         run: |
           zip -r ${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}.zip ./_site/*
-          ls
           echo $(aws s3 cp ${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}.zip s3://${{ env.ARTIFACT_BUCKET }}/ --acl public-read-write --debug)
 
       # - name: Archive build artifacts
@@ -53,26 +62,16 @@ jobs:
       # - name: Checkout
       #   uses: actions/checkout@v3
 
-      - name: Get Project ENV vars
-        uses: ./.github/actions/setvars
-
-      - name: Set AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.AWS_REGION }}
-
-      - name: Get workflow artifacts
-        id: get_artifacts
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const result = await github.rest.actions.listWorkflowRunArtifacts({
-              run_id: ${{ github.run_id }},
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-            })
+      # - name: Get workflow artifacts
+      #   id: get_artifacts
+      #   uses: actions/github-script@v6
+      #   with:
+      #     script: |
+      #       const result = await github.rest.actions.listWorkflowRunArtifacts({
+      #         run_id: ${{ github.run_id }},
+      #         owner: context.repo.owner,
+      #         repo: context.repo.repo,
+      #       })
 
       - name: Deploy to AWS Amplify
         run: |
