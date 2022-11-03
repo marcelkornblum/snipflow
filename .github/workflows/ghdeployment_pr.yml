@@ -1,0 +1,46 @@
+# Creates a GitHub "Deployment" record, which GH uses to populate the UI
+name: "PR/Preview Deployment"
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - closed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create GH Deployment for PR environment
+        if: ${{ github.event.pull_request.merged == false }}
+        uses: actions/github-script@v6
+        with:
+          github-token: "${{ secrets.GIT_TOKEN }}"
+          script: |
+            github.rest.repos.createDeployment({
+              environment: "pr${{ github.event.number }}",
+              auto_merge: false,
+              ref: "${{ github.event.pull_request.head.ref }}",
+              description: "Auto PR deployment",
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              required_contexts: []
+            })
+
+      - name: Create GH Deployment for Preview environment
+        if: ${{ github.event.pull_request.merged }}
+        uses: actions/github-script@v6
+        with:
+          github-token: "${{ secrets.GIT_TOKEN }}"
+          script: |
+            github.rest.repos.createDeployment({
+              environment: "preview",
+              auto_merge: false,
+              ref: "${{ github.event.pull_request.head.ref }}",
+              description: "Auto preview deployment",
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              required_contexts: []
+            })

@@ -1,0 +1,113 @@
+# Runs all project tests, build process and deployment to hosting env
+# triggered by GH Deployment event
+name: "Test / Build / Deploy"
+
+on: deployment
+
+permissions: write-all
+
+jobs:
+  deploy:
+    name: Test, Build, Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Cache Gems
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+
+      - name: Get Project ENV vars
+        uses: ./.github/actions/setvars
+
+      - name: Derive build-specific ENV vars
+        run: |
+          if [[ "${{ github.event.deployment.environment }}" =~ ^pr(eview|[0-9])*$ ]]; then
+            echo "ENV_URL=${{ env.ENV_URL_PREVIEW }}/${{ github.event.deployment.environment }}/" >> $GITHUB_ENV
+          elif [[ "${{ github.event.deployment.environment }}" == "staging" ]]; then
+            echo "ENV_URL=${{ env.ENV_URL_STAGING }}" >> $GITHUB_ENV
+          elif [[ "${{ github.event.deployment.environment }}" == "production" ]]; then
+            echo "ENV_URL=${{ env.ENV_URL_PRODUCTION }}" >> $GITHUB_ENV
+          fi
+
+      # Uncomment for debugging
+      # - name: View context attributes
+      #   uses: actions/github-script@v6
+      #   with:
+      #     script: console.log(context)
+
+      - name: Update GH Deployment status to "in progress"
+        id: create_in_progress_status
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.repos.createDeploymentStatus({
+              deployment_id: "${{ github.event.deployment.id }}",
+              environment: "${{ github.event.deployment.environment }}",
+              environment_url: "${{ env.ENV_URL }}",
+              log_url: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+              description: "starting CI/CD run",
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "in_progress"
+            })
+
+      - name: Run Jekyll build
+        uses: actions/jekyll-build-pages@1.0.6
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          source: ./docs/
+
+      - name: Create build archive / ZIP
+        run: |
+          zip -r "snipflow-${{ github.event.deployment.id }}.zip" ./docs/_site/
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Deploy to AWS Amplify
+        run: |
+          if [[ "${{ github.event.deployment.environment }}" =~ ^pr[0-9]*$ ]];
+            aws amplify create-branch --app-id "${{ env.AMPLIFY_APPID }}" --branch-name "${{ github.event.deployment.environment }}"
+          fi
+
+          aws amplify start-deployment --app-id "${{ env.AMPLIFY_APPID }}" --branch-name "${{ github.event.deployment.environment }}" --source-url
+
+      - name: Update GH Deployment status to "success"
+        id: ccreate_success_status
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.repos.createDeploymentStatus({
+              deployment_id: "${{ github.event.deployment.id }}",
+              environment: "${{ github.event.deployment.environment }}",
+              environment_url: "${{ env.ENV_URL }}",
+              log_url: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "success"
+            })
+
+      - name: Update GH Deployment status to "failure"
+        id: create_failed_status
+        if: ${{ failure() }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.repos.createDeploymentStatus({
+              deployment_id: "${{ github.event.deployment.id }}",
+              environment: "${{ github.event.deployment.environment }}",
+              log_url: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "failure"
+            })
