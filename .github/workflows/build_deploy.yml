@@ -61,12 +61,7 @@ jobs:
               repo: context.repo.repo,
             })
 
-            print result.data
-
-            if (result.data.artifacts.length > 0) {
-              return result.data.artifacts[0].archive_download_url
-            )
-            return ""
+            return result.data
 
       # - name: Get Artifact URL
       #   run: |
