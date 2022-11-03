@@ -89,7 +89,12 @@ jobs:
       - name: Deploy to AWS Amplify
         run: |
           if [[ "${{ github.event.deployment.environment }}" =~ ^pr[0-9]*$ ]]; then
-            aws amplify create-branch --app-id "${{ env.AMPLIFY_APPID }}" --branch-name "${{ github.event.deployment.environment }}"
+            if [[ aws amplify get-branch --app-id "${{ env.AMPLIFY_APPID }}" --branch-name "${{ github.event.deployment.environment }}" ]]; then
+              echo "Amplify environment ${{ github.event.deployment.environment }} exists..."
+            else
+              echo "creating Amplify environment ${{ github.event.deployment.environment }}"
+              aws amplify create-branch --app-id "${{ env.AMPLIFY_APPID }}" --branch-name "${{ github.event.deployment.environment }}"
+            fi
           fi
 
           aws amplify start-deployment --app-id "${{ env.AMPLIFY_APPID }}" --branch-name "${{ github.event.deployment.environment }}" --source-url "${ARCHIVE_URL}"
