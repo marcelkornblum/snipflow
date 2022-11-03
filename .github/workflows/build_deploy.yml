@@ -55,17 +55,13 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
+            const result = await github.rest.actions.listWorkflowRunArtifacts({
               run_id: ${{ github.run_id }},
               owner: context.repo.owner,
               repo: context.repo.repo,
             })
 
-            for (const artifact of artifacts) {
-              if (artifact.archive_download_url !== null) {
-                return artifact.archive_download_url
-              }
-            }
+            return result.artifacts[0].archive_download_url
 
       # - name: Get Artifact URL
       #   run: |
