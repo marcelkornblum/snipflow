@@ -47,7 +47,7 @@ jobs:
       - name: Create ZIP and upload to S3
         run: |
           zip -r ${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}.zip ./_site/*
-          echo $(aws s3 cp ${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}.zip s3://${{ env.ARTIFACT_BUCKET }}/ --acl public-read-write --debug)
+          echo $(aws s3 cp ${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}.zip s3://${{ env.ARTIFACT_BUCKET }}/)
 
       # - name: Archive build artifacts
       #   uses: actions/upload-artifact@v3
