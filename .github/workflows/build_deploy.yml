@@ -51,23 +51,40 @@ jobs:
         uses: ./.github/actions/setvars
 
       - name: Get Artifact URL
-        run: |
-          ARCHIVE_URL=$(curl \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer ${{ env.GH_TOKEN }}" \
-            https://api.github.com/repos/marcelkornblum/snipflow/actions/artifacts?name=snipflow-${{ github.event.deployment.environment }}-${{ github.event.deployment.id }} | jq ".artifacts[0].archive_download_url")
-          echo "https://api.github.com/repos/marcelkornblum/snipflow/actions/artifacts?name=snipflow-${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}"
+        id: get_artifact_url
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
+              run_id: ${{ github.run_id }},
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            })
 
-          DEBUG_RUN=$(curl \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer ${{ env.GH_TOKEN }}" \
-            https://api.github.com/repos/marcelkornblum/snipflow/actions/artifacts?name=snipflow-${{ github.event.deployment.environment }}-${{ github.event.deployment.id }})
+            for (const artifact of artifacts) {
+              if (artifact.archive_download_url !== null) {
+                return artifact.archive_download_url
+              }
+            }
 
-          echo "${DEBUG_RUN}"
-          echo "${ARCHIVE_URL}"
-          echo "$ARCHIVE_URL"
-          echo "ARCHIVE_URL=${ARCHIVE_URL}" >> $GITHUB_ENV
-          echo "${{ env.ARCHIVE_URL }}"
+      # - name: Get Artifact URL
+      #   run: |
+      #     ARCHIVE_URL=$(curl \
+      #       -H "Accept: application/vnd.github+json" \
+      #       -H "Authorization: Bearer ${{ env.GH_TOKEN }}" \
+      #       https://api.github.com/repos/marcelkornblum/snipflow/actions/artifacts?name=snipflow-${{ github.event.deployment.environment }}-${{ github.event.deployment.id }} | jq ".artifacts[0].archive_download_url")
+      #     echo "https://api.github.com/repos/marcelkornblum/snipflow/actions/artifacts?name=snipflow-${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}"
+
+      #     DEBUG_RUN=$(curl \
+      #       -H "Accept: application/vnd.github+json" \
+      #       -H "Authorization: Bearer ${{ env.GH_TOKEN }}" \
+      #       https://api.github.com/repos/marcelkornblum/snipflow/actions/artifacts?name=snipflow-${{ github.event.deployment.environment }}-${{ github.event.deployment.id }})
+
+      #     echo "${DEBUG_RUN}"
+      #     echo "${ARCHIVE_URL}"
+      #     echo "$ARCHIVE_URL"
+      #     echo "ARCHIVE_URL=${ARCHIVE_URL}" >> $GITHUB_ENV
+      #     echo "${{ env.ARCHIVE_URL }}"
 
       - name: Set AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -89,6 +106,8 @@ jobs:
               aws amplify create-branch --app-id "${{ env.AMPLIFY_APPID }}" --branch-name "${{ github.event.deployment.environment }}"
             fi
           fi
+
+          ARCHIVE_URL="${{steps.get_artifact_url.outputs.result}}"
 
           echo "deploying to ${{ github.event.deployment.environment }} using ${ARCHIVE_URL}"
 
