@@ -77,7 +77,7 @@ jobs:
             fi
           fi
 
-          aws amplify start-deployment --app-id "${{ env.AMPLIFY_APPID }}" --branch-name "${{ github.event.deployment.environment }}" --source-url "${ARCHIVE_URL}"
+          aws amplify start-deployment --app-id "${{ env.AMPLIFY_APPID }}" --branch-name "${{ github.event.deployment.environment }}" --source-url "${ARCHIVE_URL}" --debug
 
       - name: Get ENV URL for GH Deployment update
         run: |
