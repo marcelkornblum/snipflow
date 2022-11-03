@@ -7,7 +7,7 @@ on: deployment
 permissions: write-all
 
 jobs:
-  build:
+  build_deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Update GH Deployment status to "in progress"
@@ -37,7 +37,8 @@ jobs:
       - name: Create ZIP and upload to S3
         run: |
           zip -r ${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}.zip ./_site/*
-          aws s3 cp ${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}.zip s3://${{ env.ARTIFACT_BUCKET }}/
+          ls
+          echo $(aws s3 cp ${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}.zip s3://${{ env.ARTIFACT_BUCKET }}/ --acl public-read-write --debug)
 
       # - name: Archive build artifacts
       #   uses: actions/upload-artifact@v3
