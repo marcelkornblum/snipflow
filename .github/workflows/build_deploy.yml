@@ -37,7 +37,7 @@ jobs:
       - name: Archive build artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: snipflow-${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}
+          name: ${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}
           path: ./_site/*
 
   deploy:
@@ -50,8 +50,15 @@ jobs:
       - name: Get Project ENV vars
         uses: ./.github/actions/setvars
 
-      - name: Get Artifact URL
-        id: get_artifact_url
+      - name: Set AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Get workflow artifacts
+        id: get_artifacts
         uses: actions/github-script@v6
         with:
           script: |
@@ -60,34 +67,6 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
             })
-
-            return result.data
-
-      # - name: Get Artifact URL
-      #   run: |
-      #     ARCHIVE_URL=$(curl \
-      #       -H "Accept: application/vnd.github+json" \
-      #       -H "Authorization: Bearer ${{ env.GH_TOKEN }}" \
-      #       https://api.github.com/repos/marcelkornblum/snipflow/actions/artifacts?name=snipflow-${{ github.event.deployment.environment }}-${{ github.event.deployment.id }} | jq ".artifacts[0].archive_download_url")
-      #     echo "https://api.github.com/repos/marcelkornblum/snipflow/actions/artifacts?name=snipflow-${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}"
-
-      #     DEBUG_RUN=$(curl \
-      #       -H "Accept: application/vnd.github+json" \
-      #       -H "Authorization: Bearer ${{ env.GH_TOKEN }}" \
-      #       https://api.github.com/repos/marcelkornblum/snipflow/actions/artifacts?name=snipflow-${{ github.event.deployment.environment }}-${{ github.event.deployment.id }})
-
-      #     echo "${DEBUG_RUN}"
-      #     echo "${ARCHIVE_URL}"
-      #     echo "$ARCHIVE_URL"
-      #     echo "ARCHIVE_URL=${ARCHIVE_URL}" >> $GITHUB_ENV
-      #     echo "${{ env.ARCHIVE_URL }}"
-
-      - name: Set AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.AWS_REGION }}
 
       - name: Deploy to AWS Amplify
         run: |
@@ -103,7 +82,7 @@ jobs:
             fi
           fi
 
-          ARCHIVE_URL="${{steps.get_artifact_url.outputs.result}}"
+          ARCHIVE_URL=echo "${{steps.get_artifacts.outputs.result}}" | jq ".artifacts[0].archive_download_url"
 
           echo "deploying to ${{ github.event.deployment.environment }} using ${ARCHIVE_URL}"
 
@@ -114,12 +93,12 @@ jobs:
 
           echo $DEPLOY_CMD
 
-          DEPLOY_CMD=$(aws amplify start-deployment \
-            --app-id "${{ env.AMPLIFY_APPID }}" \
-            --branch-name "preview" \
-            --source-url "${ARCHIVE_URL}")
+          # DEPLOY_CMD=$(aws amplify start-deployment \
+          #   --app-id "${{ env.AMPLIFY_APPID }}" \
+          #   --branch-name "preview" \
+          #   --source-url "${ARCHIVE_URL}")
 
-          echo $DEPLOY_CMD
+          # echo $DEPLOY_CMD
 
       - name: Get ENV URL for GH Deployment update
         run: |
