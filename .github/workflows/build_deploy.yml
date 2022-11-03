@@ -56,6 +56,11 @@ jobs:
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer ${{ env.GH_TOKEN }}" \
             https://api.github.com/repos/marcelkornblum/snipflow/actions/artifacts?name=snipflow-${{ github.event.deployment.environment }}-${{ github.event.deployment.id }} | jq ".artifacts[0].archive_download_url")
+          echo "https://api.github.com/repos/marcelkornblum/snipflow/actions/artifacts?name=snipflow-${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}"
+          echo $(curl \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ env.GH_TOKEN }}" \
+            https://api.github.com/repos/marcelkornblum/snipflow/actions/artifacts?name=snipflow-${{ github.event.deployment.environment }}-${{ github.event.deployment.id }})
           echo "ARCHIVE_URL=${ARCHIVE_URL}" >> $GITHUB_ENV
 
       - name: Set AWS Credentials
