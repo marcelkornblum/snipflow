@@ -1,5 +1,7 @@
 # SnipFlow Methodology
 
+![uses SnipFlow](https://img.shields.io/badge/snipflow-v0.0.3-brightgreen?link=https://snipflow.works&link=https://github.com/marcelkornblum/snipflow&style=flat)
+
 > A workflow for productive engineers
 
 Snipflow is a workflow based on GitHub Flow but with some additions, and covering more than just git. For most teams, no new tooling or purchases are required to use it.
