@@ -1,5 +1,5 @@
 # Creates a GitHub "Deployment" record, which GH uses to populate the UI
-name: "Production Deployment"
+name: "Release actions"
 
 on:
   release:

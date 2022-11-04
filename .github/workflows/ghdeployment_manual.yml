@@ -1,5 +1,5 @@
 # Creates a GitHub "Deployment" record, which GH uses to populate the UI
-name: "Trigger Deployment"
+name: Manually trigger deployment"
 
 on:
   workflow_dispatch:

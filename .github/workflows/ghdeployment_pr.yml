@@ -1,5 +1,5 @@
 # Creates a GitHub "Deployment" record, which GH uses to populate the UI
-name: "PR/Preview Deployment"
+name: "PR actions"
 
 on:
   pull_request:
