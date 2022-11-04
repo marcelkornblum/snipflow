@@ -5,4 +5,4 @@ titles_from_headings:
 show_downloads: false
 sass:
   sass_dir: ./_scss
-baseurl: "/"
+baseurl: ""
