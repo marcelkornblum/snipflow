@@ -1,6 +1,6 @@
 # SnipFlow Methodology
 
-![uses SnipFlow](https://img.shields.io/badge/snipflow-v0.0.3-brightgreen?link=https://snipflow.works&link=https://github.com/marcelkornblum/snipflow&style=flat)
+[![uses SnipFlow](https://img.shields.io/badge/snipflow-v0.0.3-brightgreen?link=https://snipflow.works&link=https://github.com/marcelkornblum/snipflow&style=flat)](https://snipflow.works)
 
 > A workflow for productive engineers
 
