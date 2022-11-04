@@ -1,9 +1,6 @@
 toc:
   - title: Introduction
     url: /
-    subfolderitems:
-      - title: Why use SnipFlow
-        url: /#why-use-snipflow
   - title: Who it's for
     url: /who-for.html
   - title: Benefits
@@ -46,7 +43,7 @@ toc:
   - title: Resources
     url: /resources.html
     subfolderitems:
-      - title: Example repository
+      - title: Example
         url: /resources.html#example-repository
       - title: CI/CD scripts
         url: /resources.html#cicd-scripts

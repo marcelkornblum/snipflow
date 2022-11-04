@@ -1,7 +1,3 @@
----
-title: Resources
----
-
 # Samples and resources
 
 PR template
