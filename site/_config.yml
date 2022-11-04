@@ -1,0 +1,7 @@
+title: SnipFlow
+description: A workflow for productive engineers
+titles_from_headings:
+  enabled: false
+show_downloads: false
+sass:
+  sass_dir: ./_scss

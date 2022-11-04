@@ -1,0 +1,18 @@
+<nav class="docs-nav" aria-labelledby="nav-label">
+  <span id="nav-label" hidden="">main</span>
+    {% if site.data.sitenav.toc[0] %}
+    <ul>
+      {% for pageitem in site.data.sitenav.toc %}
+      <li><a href="{{ pageitem.url }}" {% if pageitem.url == page.url %}aria-current="true"{% endif %}>{{ pageitem.title }}</a>
+        {% if pageitem.subfolderitems[0] %}
+        <ul>
+          {% for section in pageitem.subfolderitems %}
+          <li><a href="{{ section.url }}">{{ section.title }}</a></li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+</nav>
