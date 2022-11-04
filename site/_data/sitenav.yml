@@ -15,7 +15,9 @@ toc:
         url: /benefits.html#clean-versioning
       - title: Transparency
         url: /benefits.html#transparency
-  - title: How SnipFlow works
+  - title: Principles
+    url: /principles.html
+  - title: How it works
     url: /how-it-works.html
     subfolderitems:
       - title: Prerequisites
@@ -39,9 +41,7 @@ toc:
         url: /getting-started.html#setting-up
       - title: Onboarding
         url: /getting-started.html#onboarding
-  - title: Principles
-    url: /principles.html
-  - title: Not just GitHub Flow
+  - title: GitHub Flow
     url: /differences-from-githubflow.html
   - title: Resources
     url: /resources.html
