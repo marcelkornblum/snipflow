@@ -1,0 +1,81 @@
+# Creates a GitHub "Deployment" record, which GH uses to populate the UI
+name: "PR actions"
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - closed
+
+jobs:
+  create-pr-deployment:
+    if: ${{ github.event.pull_request.merged == false }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create GH Deployment for PR environment
+        uses: actions/github-script@v6
+        with:
+          github-token: "${{ secrets.GH_TOKEN }}"
+          script: |
+            github.rest.repos.createDeployment({
+              environment: "pr${{ github.event.number }}",
+              auto_merge: false,
+              ref: "${{ github.event.pull_request.head.ref }}",
+              description: "Auto PR deployment",
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              required_contexts: []
+            })
+
+  create-preview-deployment:
+    if: ${{ github.event.pull_request.merged }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create GH Deployment for Preview environment
+        uses: actions/github-script@v6
+        with:
+          github-token: "${{ secrets.GH_TOKEN }}"
+          script: |
+            github.rest.repos.createDeployment({
+              environment: "preview",
+              auto_merge: false,
+              ref: "${{ github.event.pull_request.base.ref }}",
+              description: "Auto preview deployment",
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              required_contexts: []
+            })
+
+  cleanup-pr-environment:
+    if: ${{ github.event.pull_request.merged }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Get Project ENV vars
+        uses: ./.github/actions/setvars
+
+      - name: Set AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Destroy PR environment on AWS Amplify
+        run: |
+          aws amplify delete-branch --app-id "${{ env.AMPLIFY_APPID }}" --branch-name "pr${{ github.event.number }}"
+
+      - name: Delete GH Environment created for PR
+        uses: actions/github-script@v6
+        with:
+          github-token: "${{ secrets.GH_TOKEN }}"
+          script: |
+            github.rest.repos.deleteAnEnvironment({
+              environment_name: "pr${{ github.event.number }}",
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            })

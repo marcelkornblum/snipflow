@@ -1,0 +1,26 @@
+# Creates a GitHub "Deployment" record, which GH uses to populate the UI
+name: "Release actions"
+
+on:
+  release:
+    types:
+      - "published"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create GH Deployment for PROD environment
+        id: create_deployment
+        uses: actions/github-script@v6
+        with:
+          github-token: "${{ secrets.GH_TOKEN }}"
+          script: |
+            github.rest.repos.createDeployment({
+              environment: "production",
+              auto_merge: false,
+              ref: "${{ github.ref }}",
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              required_contexts: []
+            })

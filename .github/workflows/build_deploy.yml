@@ -1,0 +1,122 @@
+# Runs all project tests, build process and deployment to hosting env
+# triggered by GH Deployment event
+name: "Build & Deploy"
+
+on: deployment
+
+permissions: write-all
+
+jobs:
+  build_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update GH Deployment status to "in progress"
+        id: create_in_progress_status
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.repos.createDeploymentStatus({
+              deployment_id: "${{ github.event.deployment.id }}",
+              environment: "${{ github.event.deployment.environment }}",
+              log_url: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+              description: "starting CI/CD run",
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "in_progress"
+            })
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Get Project ENV vars
+        uses: ./.github/actions/setvars
+
+      - name: Set AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Run Jekyll build
+        uses: actions/jekyll-build-pages@v1.0.6
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          source: ./site/
+
+      - name: Create ZIP and upload to S3
+        run: |
+          cd ./_site/
+          zip -r ../${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}.zip *
+          cd ..
+          echo $(aws s3 cp ${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}.zip s3://${{ env.ARTIFACT_BUCKET }}/)
+
+      - name: Create Amplify environment
+        continue-on-error: true
+        run: |
+          if [[ "${{ github.event.deployment.environment }}" =~ ^pr[0-9]*$ ]]; then
+            {
+              GET_PR_ENV_CMD=$(aws amplify get-branch \
+                --app-id "${{ env.AMPLIFY_APPID }}" \
+                --branch-name "${{ github.event.deployment.environment }}" \
+                )
+            } || {
+              echo "creating Amplify environment ${{ github.event.deployment.environment }}"
+              aws amplify create-branch --app-id "${{ env.AMPLIFY_APPID }}" --branch-name "${{ github.event.deployment.environment }}"
+            }
+          fi
+
+      - name: Deploy to AWS Amplify
+        run: |
+          ARCHIVE_URL="https://${{ env.ARTIFACT_BUCKET }}.s3.eu-west-2.amazonaws.com/${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}.zip"
+
+          echo "deploying to ${{ github.event.deployment.environment }} using ${ARCHIVE_URL}"
+
+          DEPLOY_CMD=$(aws amplify start-deployment \
+            --app-id "${{ env.AMPLIFY_APPID }}" \
+            --branch-name "${{ github.event.deployment.environment }}" \
+            --source-url "${ARCHIVE_URL}")
+
+          echo $DEPLOY_CMD
+
+      - name: Get ENV URL for GH Deployment update
+        run: |
+          if [[ "${{ github.event.deployment.environment }}" =~ ^pr(eview|[0-9])*$ ]]; then
+            echo "ENV_URL=https://${{ github.event.deployment.environment }}${{ env.ENV_URLSUFFIX_NONPROD }}" >> $GITHUB_ENV
+          elif [[ "${{ github.event.deployment.environment }}" == "test" ]]; then
+            echo "ENV_URL=${{ env.ENV_URL_TEST }}" >> $GITHUB_ENV
+          elif [[ "${{ github.event.deployment.environment }}" == "staging" ]]; then
+            echo "ENV_URL=${{ env.ENV_URL_STAGING }}" >> $GITHUB_ENV
+          elif [[ "${{ github.event.deployment.environment }}" == "production" ]]; then
+            echo "ENV_URL=${{ env.ENV_URL_PRODUCTION }}" >> $GITHUB_ENV
+          fi
+
+      - name: Update GH Deployment status to "success"
+        id: create_success_status
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.repos.createDeploymentStatus({
+              deployment_id: "${{ github.event.deployment.id }}",
+              environment: "${{ github.event.deployment.environment }}",
+              environment_url: "${{ env.ENV_URL }}",
+              log_url: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "success"
+            })
+
+      - name: Update GH Deployment status to "failure"
+        id: create_failed_status
+        if: ${{ failure() }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.repos.createDeploymentStatus({
+              deployment_id: "${{ github.event.deployment.id }}",
+              environment: "${{ github.event.deployment.environment }}",
+              log_url: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "failure"
+            })
