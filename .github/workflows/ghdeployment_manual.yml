@@ -9,10 +9,6 @@ on:
         description: "Deploy to which environment"
         required: true
         default: "staging"
-      branch:
-        description: "Branch"
-        required: true
-        default: "main"
 
 jobs:
   create-manual-deployment:
@@ -27,7 +23,7 @@ jobs:
             github.rest.repos.createDeployment({
               environment: "${{ github.event.inputs.environment }}",
               auto_merge: false,
-              ref: "${{ github.event.inputs.branch }}",
+              ref: "${{ github.ref }}",
               owner: context.repo.owner,
               repo: context.repo.repo,
               required_contexts: []
