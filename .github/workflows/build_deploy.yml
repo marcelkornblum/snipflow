@@ -46,7 +46,7 @@ jobs:
 
       - name: Create Amplify-specific build ZIP and upload to S3
         run: |
-          cp ./amplify.yml ./_site/ # required to configure Amplify serving static files correctly
+          sudo cp ./amplify.yml ./_site/ # required to configure Amplify serving static files correctly
           cd ./_site/
           zip -r ../${{ github.event.deployment.environment }}-${{ github.event.deployment.id }}.zip *
           cd ..
