@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en-GB>
+{% include head.html %}
+
+<body>
+    <div id="page">
+        {% include header.html %}
+
+        <main>
+            {{ content }}
+        </main>
+    </div>
+
+    <footer>
+        <span id="site-footer-owner"><a href="{{ site.github.repository_url }}">SnipFlow</a> is maintained by <a href="{{ site.github.owner_url }}">Marcel Kornblum</a>.</span>
+    </footer>
+
+    <object id="external-link" data="./assets/images/external-link.svg" type="image/svg+xml"></object>
+    <object id="anchor" data="./assets/images/anchor.svg" type="image/svg+xml"></object>
+
+<script lang="javascript" src="./assets/js/menu.js"></script>
+</body>
+</html>
