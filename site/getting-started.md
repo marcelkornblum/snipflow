@@ -69,17 +69,23 @@ In Vercel, we will configure our project to use the [Vercel API](https://vercel.
 
 ### CI/CD and automation
 
+> coming soon
+
 copying scripts
 
 exposing webhook triggers
 
 ### Chat and collaboration software
 
+> coming soon
+
 adding apps to follow events
 
 connecting webhooks
 
 ### Process and workflow
+
+> coming soon
 
 terminology
 

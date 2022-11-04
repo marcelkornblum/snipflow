@@ -17,10 +17,10 @@ toc:
   - title: How it works
     url: /how-it-works.html
     subfolderitems:
-      - title: Prerequisites
-        url: /how-it-works.html#prerequisites
       - title: Overview
         url: /how-it-works.html#overview
+      - title: Prerequisites
+        url: /how-it-works.html#prerequisites
       - title: Version control
         url: /how-it-works.html#version-control
       - title: Pull Requests
