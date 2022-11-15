@@ -1,20 +1,15 @@
 # Getting started
 
-SnipFlow is very easy to get up and running; it's really a set of [CI/CD scripts](./resources.md#cicd-scripts) and [a workflow](./how-it-works.md) to follow day to day. Read on for a step by step guide to setting up a project for SnipFlow, or [jump ahead](#onboarding) if you're joining an existing SnipFlow project.
+SnipFlow is very easy to get up and running; it's really a set of CI/CD scripts and a workflow to follow day to day. Read on for a step by step guide to setting up a project for SnipFlow, or go straight to [onboarding](./onboarding.md) if you're joining an existing SnipFlow project.
 
 Although you can use any tooling with SnipFlow, we'll illustrate the steps with examples on this page using:
 
 - Git version control, hosted by [GitHub](https://github.com)
 - [GitHub Actions](https://github.com/features/actions) for the CI/CD automation
-- [Vercel](https://vercel.com) for project hosting
-- Task / issue tracking using [GitHub Issues and Projects](https://github.com/features/issues)
-- Team collaboration using [Slack](https://slack.com/)
 
-## Setting up
+[Sample scripts and resources](./resources.md) are available to further simplify it all.
 
-Setting up a project for SnipFlow is simple. You'll want to configure your repository to restrict some actions, your hosting to allow the environment builds, your CI/CD to automate many other actions, and your chat software to connect it all together. [Sample scripts and resources](./resources.md) are available to further simplify it all.
-
-### Repository
+## Repository
 
 The main repository configuration is to enforce the squash and merge PR strategy. Start by visiting the Settings page of your repository, under the "General" tab.
 
@@ -57,7 +52,7 @@ It's a good idea to also select "Require approvals", "Require status checks to p
 
 After updating all the settings, you may want to add [templates](./resources.md#samples-and-resources) to your repository, to help ensure that standards are met when e.g. opening Pull Requests.
 
-### Hosting
+## Hosting
 
 How your hosting is configured is really up to you and the requirements of your project. In order to ensure SnipFlow works, you just have to ensure that
 
@@ -67,7 +62,7 @@ How your hosting is configured is really up to you and the requirements of your 
 
 In Vercel, we will configure our project to use the [Vercel API](https://vercel.com/docs/rest-api#endpoints/deployments/create-a-new-deployment) for deployments rather than any of the other options; likewise in AWS Amplify we'll make sure we don't "connect" our repository.
 
-### CI/CD and automation
+## CI/CD and automation
 
 The heart of SnipFlow is the automation scripts. You can browse our [sample scripts and resources](./resources.md) or write your own, but once you have scripts that suit your tooling setup you can usually simply copy them into the right place.
 
@@ -82,7 +77,7 @@ If you're using GitHub you can also send all deployment events via the GitHub De
 
 In order to run your manual trigger, you'll either need an automation tool that allows that, or you'll need to expose a webhook or similar endpoint to trigger the right action. This will allow your ChatOps integration, but it's also possible you may need an extra service to enable this. One such service is [Deploybot](./resources.md#deploybot).
 
-### Chat and collaboration software
+## Chat and collaboration software
 
 If you're using a chat based collaboration platform like Slack, you will want to create a project channel with an integration to Github or your repo host of choice, to follow along with all the repo events. If you're using GitHub Deployments, these will also be posted to the Slack channel, giving your whole team greater insight into what's going on.
 
@@ -90,7 +85,7 @@ If you have a way to trigger your manual automations from an endpoint, you shoul
 
 It's possible you may need an extra service to enable the connection between chat and automation. One such service is [Deploybot](./resources.md#deploybot).
 
-### Process and workflow
+## Process and workflow
 
 The last step is non-technical; your team needs to understand and adopt the workflow, and specifically the following aspects:
 
@@ -98,34 +93,3 @@ The last step is non-technical; your team needs to understand and adopt the work
 - **PRs and issues**; the clean version history only really makes sense if [PRs are well written](./how-it-works.md#pull-requests) and contain links to issues, designs and other documentation that is pertinent
 - **Preview and Staging environments**; because the [Preview environment](./how-it-works.md#preview) auto-builds each time a PR is merged, it's perfect for internal team members to keep abreast of developments, but less than ideal for senior stakeholders or clients to review the work so far (that's what [Staging](./how-it-works.md#staging) is for).
 - **Releasing**; it's [a straightforward process](./how-it-works.md#releasing) but one your team need to understand
-
-## Onboarding
-
-Joining an existing SnipFlow project is really easy. You can read about [all aspects of the process](./how-it-works.md), or get a quick summary below.
-
-### Developers
-
-For developers, you'll need to follow the version control workflow:
-
-- Create a feature branch for each feature, task or issue
-- Commit as many times as you like to your feature branch
-- Open a PR as early as you like, and certainly before merging your changes
-
-A couple of extra points to keep in mind:
-
-- You should spend time making your [Pull Request](./how-it-works.md#pull-requests) really high quality, ensuring it has all the requirements
-- Never rebase anything that's been pushed to the remote repo
-
-### Team Leads, Scrum Masters, Project Managers, Producers
-
-If you're not actually writing code but you're involved in quality, timings, and output at a granular level, SnipFlow makes things easy for you:
-
-- Check in on the [Preview](./how-it-works.md#preview) environment to see the latest state of the project, built and hosted
-- Keep on top of the [Pull Request](./how-it-works.md#pr) environments - each PR will usually have a dedicated place that the built code can be browsed; this is your chance to feed in and affect the work before it's merged, and where to keep quality high. - If you're looking at code quality you should of course also be reviewing the PRs carefully
-- You can easily deploy to [Staging](./how-it-works.md#staging) or [Production](./how-it-works.md#production) yourself, or ask an engineer without disrupting them too much
-
-Extra things to note:
-
-- It should be easy to follow progress on issues using your collaboration software
-- You should never see "it works on my machine" again; every environment is built by the same automated script, never by an individual developer
-- You should be able to easily follow the thread from a ticket to the code implementing that feature, to the discussion and amendments made during the PR phase before that code was merged in. You can do this from the task mangement software, or using git blame from the affected lines of code. Debugging should be slightly less painful.

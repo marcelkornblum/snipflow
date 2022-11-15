@@ -17,7 +17,7 @@ SnipFlow uses automation and shared terminology; it connects version control, CI
 
 Tested by many teams over several years, the SnipFlow workflow results in improved developer onboarding, focus and productivity, more transparency for leads and managers, and easier rationalising about code during complex debugging. It is also completely free to adopt.
 
-Read about [how it works](./how-it-works.md), jump straight into [Getting started](getting-started.md), or if you're joining a team that already uses SnipFlow, skip to the [onboarding](./getting-started.md#onboarding) section. Or to see an example of SnipFlow in action, browse [the repo powering this website](https://github.com/marcelkornblum/snipflow).
+Read about [how it works](./how-it-works.md), jump straight into [Getting started](getting-started.md), or if you're joining a team that already uses SnipFlow, skip to the [onboarding](./onboarding.md) section. Or to see an example of SnipFlow in action, browse [the repo powering this website](https://github.com/marcelkornblum/snipflow).
 
 ## Why use SnipFlow?
 

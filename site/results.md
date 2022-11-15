@@ -8,7 +8,7 @@ Using SnipFlow standardises the terminology you use, so that communication becom
 
 Most technical teams have some turnover, and some teams have a lot. Client-facing studios in particular often build teams regularly from freelance resources - onboarding coders is a time intensive task for most of the industry.
 
-The day to day workflow using SnipFlow is simple and probably very similar to what your new coder already uses. It usually takes no more than a 2 minute read through the [onboarding](./getting-started.md#onboarding) documentation to understand the process.
+The day to day workflow using SnipFlow is simple and probably very similar to what your new coder already uses. It usually takes no more than a 2 minute read through the [onboarding](./onboarding.md) documentation to understand the process.
 
 Because SnipFlow emphasises flow time over administration, it also allows developers to focus on one thing at a time in their day (i.e. coding vs documentation), making it easier to be productive while at the same time improving on e.g. PR documentation.
 

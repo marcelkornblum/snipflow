@@ -4,10 +4,18 @@ toc:
   - title: Getting started
     url: /getting-started.html
     subfolderitems:
-      - title: Setting up
-        url: /getting-started.html#setting-up
-      - title: Onboarding
-        url: /getting-started.html#onboarding
+      - title: Repository
+        url: /getting-started.html#repository
+      - title: Hosting
+        url: /getting-started.html#hosting
+      - title: Automation
+        url: /getting-started.html#cicd-and-automation
+      - title: ChatOps
+        url: /getting-started.html#chat-and-collaboration-software
+      - title: Process
+        url: /getting-started.html#process-and-workflow
+  - title: Onboarding
+    url: /onboarding.html
   - title: Who it's for
     url: /who-for.html
   - title: What you get
