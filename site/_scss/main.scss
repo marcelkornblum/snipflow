@@ -175,6 +175,7 @@ body {
 }
 
 #page {
+    flex-grow: 999;
     display: flex;
     flex-wrap: wrap;
     min-width: 320px;
@@ -202,7 +203,7 @@ main {
 }
 
 footer {
-    flex-grow: 999;
+    // flex-grow: 999;
     max-inline-size: 100vw;
     width: 100vw;
     color: white;
@@ -249,6 +250,14 @@ nav {
 }
 
 @media (max-width:866px) {
+    #page {
+        flex-direction: column;
+    }
+
+    header {
+        flex-basis: auto;
+    }
+
     header #menu-button {
         display: block;
     }
@@ -337,5 +346,5 @@ footer::before {
 
 #external-link,
 #anchor {
-    visibility: hidden;
+    display: none;
 }
