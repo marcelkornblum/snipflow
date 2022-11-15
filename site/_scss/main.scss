@@ -281,6 +281,7 @@ nav ul {
 
 nav ul ul {
     margin-left: var(--s1);
+    display: none;
 }
 
 nav a {
@@ -293,6 +294,10 @@ nav a {
 
 [aria-current=true] {
     text-decoration: underline;
+}
+
+[aria-current=true]~ul {
+    display: block;
 }
 
 nav ul ul a {
