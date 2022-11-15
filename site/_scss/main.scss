@@ -123,11 +123,12 @@ main > * {
     max-width: 35rem;
 }
 
+figcaption svg,
 h1 svg,
 h2 svg,
 h3 svg,
-p svg,
-figcaption svg {
+li svg,
+p svg {
     width: .75em;
     height: .75em;
     margin: 0 0 0 .25em;
@@ -280,6 +281,7 @@ nav ul {
 
 nav ul ul {
     margin-left: var(--s1);
+    display: none;
 }
 
 nav a {
@@ -292,6 +294,10 @@ nav a {
 
 [aria-current=true] {
     text-decoration: underline;
+}
+
+[aria-current=true]~ul {
+    display: block;
 }
 
 nav ul ul a {
@@ -309,8 +315,17 @@ nav a:hover {
 
 /* Content */
 
+figure {
+    text-align: center;
+}
+
 figure img {
     max-width: 100%;
+}
+
+figure img.narrow {
+    width: 40%;
+    min-width: 15rem;
 }
 
 figcaption {

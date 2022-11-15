@@ -1,0 +1,88 @@
+# Runs all project tests, build process and deployment to hosting env
+# triggered by GH Deployment event
+name: "Build & Deploy"
+
+on: deployment
+
+permissions: write-all
+
+jobs:
+  build_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update GH Deployment status to "in progress"
+        id: create_in_progress_status
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.repos.createDeploymentStatus({
+              deployment_id: "${{ github.event.deployment.id }}",
+              environment: "${{ github.event.deployment.environment }}",
+              log_url: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+              description: "starting CI/CD run",
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "in_progress"
+            })
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Run linting, tests
+        run: |
+          # this step left to the user, can also be done in a separate workflow
+          exit
+
+      - name: Run build
+        run: |
+          # this step left to the user
+          exit
+
+      - name: Set Credentials
+        run: |
+          # if needed, this step left to the user
+          exit
+
+      - name: Create temporary PR environment
+        continue-on-error: true
+        run: |
+          # if needed, this step left to the user
+          exit
+
+      - name: Deploy
+        run: |
+          # this step left to the user
+
+          URL=# set to whatever the final deployment URL is
+          echo "ENV_URL=$URL" >> $GITHUB_ENV
+          exit
+
+      - name: Update GH Deployment status to "success"
+        id: create_success_status
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.repos.createDeploymentStatus({
+              deployment_id: "${{ github.event.deployment.id }}",
+              environment: "${{ github.event.deployment.environment }}",
+              environment_url: "${{ env.ENV_URL }}",
+              log_url: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "success"
+            })
+
+      - name: Update GH Deployment status to "failure"
+        id: create_failed_status
+        if: ${{ failure() }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.repos.createDeploymentStatus({
+              deployment_id: "${{ github.event.deployment.id }}",
+              environment: "${{ github.event.deployment.environment }}",
+              log_url: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "failure"
+            })

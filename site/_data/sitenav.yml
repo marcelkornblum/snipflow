@@ -1,18 +1,25 @@
 toc:
   - title: Introduction
     url: /
-    subfolderitems:
-      - title: Why use SnipFlow
-        url: /#why-use-snipflow
   - title: Getting started
     url: /getting-started.html
     subfolderitems:
-      - title: Setting up
-        url: /getting-started.html#setting-up
-      - title: Onboarding
-        url: /getting-started.html#onboarding
-  - title: Benefits
-    url: /benefits.html
+      - title: Repository
+        url: /getting-started.html#repository
+      - title: Hosting
+        url: /getting-started.html#hosting
+      - title: Automation
+        url: /getting-started.html#cicd-and-automation
+      - title: ChatOps
+        url: /getting-started.html#chat-and-collaboration-software
+      - title: Process
+        url: /getting-started.html#process-and-workflow
+  - title: Onboarding
+    url: /onboarding.html
+  - title: Who it's for
+    url: /who-for.html
+  - title: What you get
+    url: /results.html
     subfolderitems:
       - title: Easy onboarding
         url: /benefits.html#easy-onboarding
@@ -20,17 +27,13 @@ toc:
         url: /benefits.html#clean-versioning
       - title: Transparency
         url: /benefits.html#transparency
-      - title: Communication
-        url: /benefits.html#communication
-  - title: Principles
-    url: /principles.html
-  - title: How SnipFlow works
+  - title: How it works
     url: /how-it-works.html
     subfolderitems:
-      - title: Prerequisites
-        url: /how-it-works.html#prerequisites
       - title: Overview
         url: /how-it-works.html#overview
+      - title: Prerequisites
+        url: /how-it-works.html#prerequisites
       - title: Version control
         url: /how-it-works.html#version-control
       - title: Pull Requests
@@ -41,14 +44,25 @@ toc:
         url: /how-it-works.html#cicd
       - title: ChatOps
         url: /how-it-works.html#chatops
+  - title: What it's not
+    url: /what-its-not.html
+    subfolderitems:
+      - title: Git Flow
+        url: /what-its-not.html#git-flow
+      - title: GitHub Flow
+        url: /what-its-not.html#github-flow
+      - title: Branch based
+        url: /what-its-not.html#branch-based-deployments
+  - title: Principles
+    url: /principles.html
   - title: Resources
     url: /resources.html
-  - title: Differences from GitHub Flow
-    url: /differences-from-githubflow.html
     subfolderitems:
-      - title: Example repository
+      - title: Example repo
         url: /resources.html#example-repository
       - title: CI/CD scripts
         url: /resources.html#cicd-scripts
       - title: Deploybot
         url: /resources.html#deploybot
+      - title: Case studies
+        url: /resources.html#case-studies
