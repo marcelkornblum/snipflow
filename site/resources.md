@@ -8,6 +8,8 @@ PR template
 
 > coming soon
 
+[the repo powering this website](https://github.com/marcelkornblum/snipflow).
+
 ## CI/CD scripts
 
 > coming soon
@@ -15,3 +17,5 @@ PR template
 ## Deploybot
 
 > coming soon
+
+## Case studies

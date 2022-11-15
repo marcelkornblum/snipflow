@@ -1,6 +1,6 @@
 # Who it's for
 
-SnipFlow suits any technical team that uses code versioning, from one person on a side project to a long-running cross-disciplanry team working on a mission critical product.
+SnipFlow suits any technical team that uses code versioning, from one person on a side project to a long-running cross-disciplinary team working on a mission critical product.
 
 ## Agencies and studios
 

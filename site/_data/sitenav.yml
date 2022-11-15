@@ -50,9 +50,11 @@ toc:
   - title: Resources
     url: /resources.html
     subfolderitems:
-      - title: Example
+      - title: Example repo
         url: /resources.html#example-repository
       - title: CI/CD scripts
         url: /resources.html#cicd-scripts
       - title: Deploybot
         url: /resources.html#deploybot
+      - title: Case studies
+        url: /resources.html#case-studies

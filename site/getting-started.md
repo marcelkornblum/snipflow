@@ -12,7 +12,7 @@ Although you can use any tooling with SnipFlow, we'll illustrate the steps with 
 
 ## Setting up
 
-Setting up a project for SnipFlow is fairly simple. You'll want to configure your repository to restrict some actions, your hosting to allow the environment builds, your CI/CD to automate many other actions, and your chat software to connect it all together. [Sample scripts and resources](./resources.md) are available to further simplify it all.
+Setting up a project for SnipFlow is simple. You'll want to configure your repository to restrict some actions, your hosting to allow the environment builds, your CI/CD to automate many other actions, and your chat software to connect it all together. [Sample scripts and resources](./resources.md) are available to further simplify it all.
 
 ### Repository
 
@@ -63,37 +63,41 @@ How your hosting is configured is really up to you and the requirements of your 
 
 - You can easily have multiple environments for your project (ideally with some that can be auto-created and -destroyed)
 - You have no "auto-deployment" features from your hosting setup enabled; we will control all all our builds via our own CI/CD scripts, set up in the next section
-- You are able to push built code to your hosting environment using automations
+- You are able to push built code to your hosting environment using automations, perhaps using an API
 
-In Vercel, we will configure our project to use the [Vercel API](https://vercel.com/docs/rest-api#endpoints/deployments/create-a-new-deployment) for deployments rather than any of the other options; likewide in AWS Amplify we'll make sure we don't connect our repository.
+In Vercel, we will configure our project to use the [Vercel API](https://vercel.com/docs/rest-api#endpoints/deployments/create-a-new-deployment) for deployments rather than any of the other options; likewise in AWS Amplify we'll make sure we don't "connect" our repository.
 
 ### CI/CD and automation
 
-> coming soon
+The heart of SnipFlow is the automation scripts. You can browse our [sample scripts and resources](./resources.md) or write your own, but once you have scripts that suit your tooling setup you can usually simply copy them into the right place.
 
-copying scripts
+When using GitHub Actions, automation scripts are written as YAML files and saved in the repo under the `./github/workflows` folder. We want scripts that trigger environment builds on the following triggers:
 
-exposing webhook triggers
+- manual trigger (for Staging and occasional other environments for flexibility)
+- Release - or git tag creation (for Production environment)
+- `main` branch updated (for Preview environment)
+- Pull Request created, updated (for PR environments)
+
+If you're using GitHub you can also send all deployment events via the GitHub Deployment API, which captures the deployment environment, URL and commit hash, and uses that information to keep the GitHub UI updated (e.g. with [view deployment](https://github.com/marcelkornblum/snipflow/pull/16) buttons on the Pull Requests, and a page listing all environments, and which code was deployed where, and when).
+
+In order to run your manual trigger, you'll either need an automation tool that allows that, or you'll need to expose a webhook or similar endpoint to trigger the right action. This will allow your ChatOps integration, but it's also possible you may need an extra service to enable this. One such service is [Deploybot](./resources.md#deploybot).
 
 ### Chat and collaboration software
 
-> coming soon
+If you're using a chat based collaboration platform like Slack, you will want to create a project channel with an integration to Github or your repo host of choice, to follow along with all the repo events. If you're using GitHub Deployments, these will also be posted to the Slack channel, giving your whole team greater insight into what's going on.
 
-adding apps to follow events
+If you have a way to trigger your manual automations from an endpoint, you should then connect that endpoint to an integration in your collaborative chat client; this allows any team member to trigger a build from Slack or the equivalent, making it quick and easy for even non-technical people to runb builds.
 
-connecting webhooks
+It's possible you may need an extra service to enable the connection between chat and automation. One such service is [Deploybot](./resources.md#deploybot).
 
 ### Process and workflow
 
-> coming soon
+The last step is non-technical; your team needs to understand and adopt the workflow, and specifically the following aspects:
 
-terminology
-
-PRs and issues
-
-preview and staging
-
-releasing
+- **Terminology**; it's important that everyone refers to e.g. each environment the same way each time, to reduce confusion
+- **PRs and issues**; the clean version history only really makes sense if [PRs are well written](./how-it-works.md#pull-requests) and contain links to issues, designs and other documentation that is pertinent
+- **Preview and Staging environments**; because the [Preview environment](./how-it-works.md#preview) auto-builds each time a PR is merged, it's perfect for internal team members to keep abreast of developments, but less than ideal for senior stakeholders or clients to review the work so far (that's what [Staging](./how-it-works.md#staging) is for).
+- **Releasing**; it's [a straightforward process](./how-it-works.md#releasing) but one your team need to understand
 
 ## Onboarding
 

@@ -1,8 +1,8 @@
 # The SnipFlow workflow
 
-SnipFlow is a way of working for engineering teams. It reduces technical admin and deployment risk while increasing productivity, quality and transparency; it's free and easy to use, and most coders who've used it love it.
+SnipFlow is a way of working for engineering teams, combining a great developer experience with a great experience for non-technical team members.
 
-It suits [all types of teams](./who-for.md) but is most valuable in a studio environment. It [builds on](./what-its-not.html#github-flow) GitHub Flow to connect the dots between the tools you already use, so your team can focus on the work, not the admin.
+It's easy and quick to set up on new projects (and most existing ones). It reduces technical admin and deployment risk while increasing productivity, quality and transparency; it's free and easy to use, and most coders who've used it love it.
 
 Using SnipFlow will allow your team to say goodbye to:
 
@@ -11,11 +11,13 @@ Using SnipFlow will allow your team to say goodbye to:
 - "can you put the latest version on a link for me?"
 - "how do I run a deployment?"
 
+It suits [all types of teams](./who-for.md) but is most valuable in a studio environment. It [builds on](./what-its-not.html#github-flow) GitHub Flow to connect the dots between the tools you already use, so your team can focus on the work, not the admin.
+
 SnipFlow uses automation and shared terminology; it connects version control, CI, issue tracking, hosting environments and even team chat into a cohesive way of working. It reduces technical admin and developer context switching, improves communication and transparency between all team members, and scales from side hustles to business critical product teams. You don't need to licence it or (probably) use any new tooling to use it.
 
 Tested by many teams over several years, the SnipFlow workflow results in improved developer onboarding, focus and productivity, more transparency for leads and managers, and easier rationalising about code during complex debugging. It is also completely free to adopt.
 
-Read about [how it works](./how-it-works.md), jump straight into [Getting started](getting-started.md), or if you're joining a team that already uses SnipFlow skip to the [onboarding](./getting-started.md#onboarding) section.
+Read about [how it works](./how-it-works.md), jump straight into [Getting started](getting-started.md), or if you're joining a team that already uses SnipFlow, skip to the [onboarding](./getting-started.md#onboarding) section. Or to see an example of SnipFlow in action, browse [the repo powering this website](https://github.com/marcelkornblum/snipflow).
 
 ## Why use SnipFlow?
 

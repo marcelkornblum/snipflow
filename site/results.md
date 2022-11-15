@@ -1,6 +1,6 @@
-# Benefits
+# Benefits of using SnipFlow
 
-SnipFlow gives your team a simple way to connect everything together, standard places to review your work in various stages, and easy ways to deploy to them.
+It gives your team a simple way to connect everything together, standard places to review your work in various stages, and easy ways to deploy to them.
 
 Using SnipFlow standardises the terminology you use, so that communication becomes easier and everyday tasks become simpler and less risky.
 
