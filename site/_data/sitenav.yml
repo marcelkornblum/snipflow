@@ -1,6 +1,13 @@
 toc:
   - title: Introduction
     url: /
+  - title: Getting started
+    url: /getting-started.html
+    subfolderitems:
+      - title: Setting up
+        url: /getting-started.html#setting-up
+      - title: Onboarding
+        url: /getting-started.html#onboarding
   - title: Who it's for
     url: /who-for.html
   - title: What you get
@@ -29,20 +36,15 @@ toc:
         url: /how-it-works.html#cicd
       - title: ChatOps
         url: /how-it-works.html#chatops
-  - title: Getting started
-    url: /getting-started.html
-    subfolderitems:
-      - title: Setting up
-        url: /getting-started.html#setting-up
-      - title: Onboarding
-        url: /getting-started.html#onboarding
   - title: What it's not
     url: /what-its-not.html
     subfolderitems:
       - title: Git Flow
-        url: /what-its-not.html#differences-from-gitflow
+        url: /what-its-not.html#git-flow
       - title: GitHub Flow
-        url: /what-its-not.html#differences-from-githubflow
+        url: /what-its-not.html#github-flow
+      - title: Branch based
+        url: /what-its-not.html#branch-based-deployments
   - title: Principles
     url: /principles.html
   - title: Resources

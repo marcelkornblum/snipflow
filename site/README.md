@@ -2,9 +2,16 @@
 
 SnipFlow is a way of working for engineering teams. It reduces technical admin and deployment risk while increasing productivity, quality and transparency; it's free and easy to use, and most coders who've used it love it.
 
-It suits [all types of teams](./who-for.md) but is most valuable in a studio environment. It [builds on](./what-its-not.html#differences-from-githubflow.md) GitHub Flow to connect the dots between the tools you already use, so your team can focus on the work, not the admin.
+It suits [all types of teams](./who-for.md) but is most valuable in a studio environment. It [builds on](./what-its-not.html#github-flow) GitHub Flow to connect the dots between the tools you already use, so your team can focus on the work, not the admin.
 
-SnipFlow uses automation and shared terminology; connecting version control, CI, issue tracking, hosting environments and even team chat into a cohesive way of working. It reduces technical admin and developer context switching, improves communication and transparency between all team members, and scales from side hustles to business critical product teams.
+Using SnipFlow will allow your team to say goodbye to:
+
+- "it works on my machine"
+- "why on earth did they commit that code?"
+- "can you put the latest version on a link for me?"
+- "how do I run a deployment?"
+
+SnipFlow uses automation and shared terminology; it connects version control, CI, issue tracking, hosting environments and even team chat into a cohesive way of working. It reduces technical admin and developer context switching, improves communication and transparency between all team members, and scales from side hustles to business critical product teams. You don't need to licence it or (probably) use any new tooling to use it.
 
 Tested by many teams over several years, the SnipFlow workflow results in improved developer onboarding, focus and productivity, more transparency for leads and managers, and easier rationalising about code during complex debugging. It is also completely free to adopt.
 
