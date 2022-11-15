@@ -1,8 +1,12 @@
-# Differences from GitHub Flow
+# What it's not
+
+## Differences from Git Flow
+
+## Differences from GitHub Flow
 
 SnipFlow is at heart the GitHub Flow git based workflow; there are no GitHub Flow elements that SnipFlow overrides.
 
-However, SnipFlow is both more wide ranging (covering more than just git) and more opinionated (covering more about git than GitHub Flow does). 
+However, SnipFlow is both more wide ranging (covering more than just git) and more opinionated (covering more about git than GitHub Flow does).
 
 Compared to GitHub Flow, SnipFlow has the following extra rules:
 

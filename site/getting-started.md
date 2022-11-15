@@ -65,7 +65,7 @@ How your hosting is configured is really up to you and the requirements of your 
 - You have no "auto-deployment" features from your hosting setup enabled; we will control all all our builds via our own CI/CD scripts, set up in the next section
 - You are able to push built code to your hosting environment using automations
 
-In Vercel, we will configure our project to use the [Vercel API](https://vercel.com/docs/rest-api#endpoints/deployments/create-a-new-deployment) for deployments rather than any of the other options.
+In Vercel, we will configure our project to use the [Vercel API](https://vercel.com/docs/rest-api#endpoints/deployments/create-a-new-deployment) for deployments rather than any of the other options; likewide in AWS Amplify we'll make sure we don't connect our repository.
 
 ### CI/CD and automation
 
