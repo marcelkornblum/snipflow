@@ -203,9 +203,8 @@ main {
 }
 
 footer {
-    // flex-grow: 999;
     max-inline-size: 100vw;
-    width: 100vw;
+    width: 100%;
     color: white;
     padding-top: var(--s0);
     font-size: var(--s-1);
@@ -346,5 +345,7 @@ footer::before {
 
 #external-link,
 #anchor {
-    display: none;
+    position: absolute;
+    left: -1000em;
+    top: -1000em;
 }
